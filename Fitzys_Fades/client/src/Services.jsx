@@ -11,8 +11,8 @@ function Services() {
             <div className="relative">
               <img src="https://via.placeholder.com/200" alt="Placeholder" className="rounded-md z-1"></img>
               <div className="absolute bottom-0 right-0 p-2 z-2">
-                <h2 className="text-xl font-semibold mb-2">Service Name 7</h2>
-                <p className="text-gray-600 mb-2 text-right">$400</p>
+                <h2 className="text-xl font-semibold mb-2">Traditional Mens Cut</h2>
+                <p className="text-gray-600 mb-2 text-right">$45</p>
               </div>
             </div>
           </div>
