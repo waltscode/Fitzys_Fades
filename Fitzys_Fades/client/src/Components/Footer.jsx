@@ -6,7 +6,7 @@ function Footer() {
 
   return (
     <>
-      <footer className="text-center fixed bottom-0 w-full bg-gray-800 text-white p-4">
+      <footer className="text-center fixed bottom-0 w-full bg-black bg-opacity-90 text-white p-4">
         Fitzy Fades Ⓒ 2024
       </footer>
     </>

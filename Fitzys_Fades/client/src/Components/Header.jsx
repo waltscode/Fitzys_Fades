@@ -1,47 +1,57 @@
 //import { useState } from 'react'
 //import { Link } from "react-router-dom";
+import '../styles/Header.css';
 
 function Header() {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-      <header className="flex flex-col items-center justify-center bg-gray-400">
-        <div className="mb-2">
-          <h1 className="text-6xl font-bold text-center">Fitzy Fade</h1>
+    <header className="flex items-center justify-between bg-black bg-opacity-90 px-4 py-2 border-b-4 border-red-500">
+      <div className="flex items-center">
+        <img
+          src="/images/fitz.jpg"
+          alt="fitzy's fades logo"
+          className="w-20 h-20 mr-4 rounded-full"
+        />
+        <div className="flex flex-col items-start">
+          {/* <h1 className="text-2xl font-bold">1551</h1> */}
+          {/* Add more header content as needed */}
         </div>
+      </div>
 
-        <nav className="w-full px-5 md:px-0 md:w-90 mb-4">
-          <ul className="flex justify-between px-5">
-            <li className="">
-              <a className="text-blue-500 hover:text-blue-700" href="/about">
-                About us
-              </a>
-            </li>
-            <li className="">
-              <a className="text-blue-500 hover:text-blue-700" href="/services">
-                Services
-              </a>
-            </li>
-            <li className="">
-              <a className="text-blue-500 hover:text-blue-700" href="/contact">
-                Contact
-              </a>
-            </li>
-            <li className="">
-              <a className="text-blue-500 hover:text-blue-700" href="/signup">
-                Sign Up
-              </a>
-            </li>
-            <li>
-              <a className="text-blue-500 hover:text-blue-700" href="/signin">
-                Sign In
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </>
+      <nav className="flex items-center">
+      <ul className="flex space-x-4 text-white">
+  {/* Navigation links */}
+  <li>
+    <a className="hover:text-gray-300" href="/about">
+      About us
+    </a>
+  </li>
+  <li>
+    <a className="hover:text-gray-300" href="/services">
+      Services
+    </a>
+  </li>
+  <li>
+    <a className="hover:text-gray-300" href="/contact">
+      Contact
+    </a>
+  </li>
+  <li>
+    <a className="hover:text-gray-300" href="/signup">
+      Sign Up
+    </a>
+  </li>
+  <li>
+    <a className="hover:text-gray-300" href="/signin">
+      Sign In
+    </a>
+  </li>
+</ul>
+      </nav>
+    </header>
+  </>
   );
 }
 
