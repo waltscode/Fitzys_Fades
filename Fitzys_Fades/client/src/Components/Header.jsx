@@ -1,13 +1,14 @@
 //import { useState } from 'react'
 //import { Link } from "react-router-dom";
 import '../styles/Header.css';
+import headerImage from '/images/textstripe.jpg';
 
 function Header() {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-    <header className="flex items-center justify-between bg-black bg-opacity-90 px-4 py-2 border-b-4 border-red-500">
+    <header className="flex items-center justify-between bg-black bg-opacity-90 px-4 py-2 border-b-4 border-red-500"  >
       <div className="flex items-center">
         <img
           src="/images/fitz.jpg"
@@ -15,11 +16,11 @@ function Header() {
           className="w-20 h-20 mr-4 rounded-full"
         />
         <div className="flex flex-col items-start">
-          {/* <h1 className="text-2xl font-bold">1551</h1> */}
-          {/* Add more header content as needed */}
+          <h1 className="text-3xl font-bold text-white">Fitzys Fades</h1>
+          <p className="text-xs text-white">Barber Shop</p>
         </div>
       </div>
-
+      <div className="absolute top-0 left-0 right-0 bottom-0 border border-image-slice border-image-source"></div>
       <nav className="flex items-center">
       <ul className="flex space-x-4 text-white">
   {/* Navigation links */}
