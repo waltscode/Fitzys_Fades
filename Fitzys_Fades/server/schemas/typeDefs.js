@@ -55,6 +55,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
     deleteAppointment(id: ID!): User
+    updateAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
+    updateUser(user_name: String!, email: String!, phone: String!, password: String!): User
   }
 `;
 
