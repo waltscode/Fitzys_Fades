@@ -10,3 +10,11 @@
     background-position: 100% 0;
     transition: background-position 0.3s ease;
   }
+
+  .border-image-slice {
+    border-image-slice: 1;
+  }
+  
+  .border-image-source {
+    border-image-source: url('/Fitzys_Fades/client/public/images/textstripe.jpg');
+  }

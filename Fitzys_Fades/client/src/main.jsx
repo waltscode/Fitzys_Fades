@@ -6,7 +6,9 @@ import Services from './Services.jsx'
 import Contact from './Contact.jsx'
 import Signup from './Signup.jsx'
 import Signin from './Signin.jsx'
+
 import './index.css'
+import './styles/Header.css'
 
 import {
   createBrowserRouter,
