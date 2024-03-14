@@ -1,40 +1,52 @@
 const typeDefs = `
-    type User {
-        _id: ID!
-        user_name: String!
-        email: String!
-        phone: String!
-        password: String!
-        appointments: [Appointment]
-    }
+  enum BarberEnum {
+    JOHN_DOE
+    JANE_DAWN
+    WILLIAM_WILLIAMS
+  }
 
-    type Appointment {
-        _id: ID!
-        barber_name: String!
-        user_name: String!
-        date: String!
-        time: String!
-        service: String!
-    }
+  enum ServiceEnum {
+    FADE
+    CUT
+    SHAVE
+  }
 
-    type Query {
-        users: [User]
-        user(id: ID!): User
-        appointments: [Appointment]
-        appointment(id: ID): Appointment
-    }
+  type User {
+    _id: ID!
+    user_name: String!
+    email: String!
+    phone: String!
+    password: String!
+    appointments: [Appointment]
+  }
 
-    type Mutation {
-        // Create User
-        // Get all User
-        // Get one User
-        // Update User
-        // Create Appointment
-        // Get all Appointment
-        // Get one Appointment
-        // Update Appointment
-        // Delete Appointment
-    }
+  type Appointment {
+    _id: ID!
+    barber_name: BarberEnum!
+    date: Date!
+    time: Date!
+    service: ServiceEnum!
+  }
+
+  input UserInput {
+    user_name: String!
+    email: String!
+    phone: String!
+    password: String!
+  }
+
+  type Query {
+    users: [User]
+    user(id: ID!): User
+    appointments: [Appointment]
+    appointment(id: ID): Appointment
+  }
+
+  type Mutation {
+    createUser(userInput: UserInput!): User
+    createUser(user_name: String!, email: String!, phone: String!, password: String!)
+    createAppointment(barber_name: BarberEnum!, date: Date!, time: Date!, service: ServiceEnum!): Appointment
+  }
 `;
 
 module.exports = typeDefs;
