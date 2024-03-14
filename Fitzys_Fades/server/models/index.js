@@ -1,4 +1,4 @@
-const Barber = require('./Appointment');
+const Appointment = require('./Appointment');
 const User = require('./User');
 
-module.exports = {Barber, User}
+module.exports = {Appointment, User}

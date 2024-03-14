@@ -23,8 +23,8 @@ const typeDefs = `
   type Appointment {
     _id: ID!
     barber_name: BarberEnum!
-    date: Date!
-    time: Date!
+    date: String!
+    time: String!
     service: ServiceEnum!
   }
 
@@ -35,17 +35,26 @@ const typeDefs = `
     password: String!
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
     appointments: [Appointment]
     appointment(id: ID): Appointment
+    me: User
   }
 
+
+
   type Mutation {
-    createUser(userInput: UserInput!): User
-    createUser(user_name: String!, email: String!, phone: String!, password: String!)
-    createAppointment(barber_name: BarberEnum!, date: Date!, time: Date!, service: ServiceEnum!): Appointment
+    createUser(userInput: UserInput!): Auth
+    login(email: String!, password: String!): Auth
+    createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
+    deleteAppointment(id: ID!): User
   }
 `;
 
