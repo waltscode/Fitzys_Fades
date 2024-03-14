@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <>
-    <header className="flex items-center justify-between bg-black bg-opacity-90 px-4 py-2 border-b-4 border-red-500"  >
+   <header className="flex items-center justify-between bg-black bg-opacity-90 px-4 py-2 border-b-4 border-red-500 border-image border-image-slice border-image-source" style={{borderImageSource: `url(${headerImage})`, borderImageSlice: 2}}>
       <div className="flex items-center">
         <img
           src="/images/fitz.jpg"
@@ -20,7 +20,6 @@ function Header() {
           <p className="text-xs text-white">Barber Shop</p>
         </div>
       </div>
-      <div className="absolute top-0 left-0 right-0 bottom-0 border border-image-slice border-image-source"></div>
       <nav className="flex items-center">
       <ul className="flex space-x-4 text-white">
   {/* Navigation links */}
