@@ -1,4 +1,5 @@
 const { User, Appointment } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/Auth");
 
 const resolvers = {
   Query: {
@@ -18,17 +19,47 @@ const resolvers = {
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
     },
+    me : async (_, args, context) => {
+      if (context.user) {
+        return await User.findById(context.user._id).populate("appointments");
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    }
   },
+
   Mutation: {
     createUser: async (_, { userInput }) => {
-      const newUser = new User(userInput);
-      return newUser.save();
+      const user = await User.create(userInput);
+      const token = signToken(user);
+      return { token, user };
     },
-    createUser: async (parent, { user_name, email, phone, password}) =>{
-        return await User.create({user_name,email, phone, password})
+    login: async (_, { email, password }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const token = signToken(user);
+      return { token, user };
     },
-    createAppointment: async (parent, { barber_name, date, time, service}) => {
-        return await Appointment.create({barber_name,date,time,service})
+    createAppointment: async (parent, { barber_name, date, time, service}, context) => {
+      const appointment = await Appointment.create({barber_name,date,time,service})
+      const user = await User.findByIdAndUpdate(context.user._id,
+        { $push: { appointments: appointment._id } },
+        { new: true }
+      );
+      return appointment;
+    },
+    deleteAppointment: async (parent, { id }, context) => {
+      const appointment = await Appointment.findByIdAndDelete(id);
+      const user = await User.findByIdAndUpdate(context.user._id,
+        { $pull: { appointments: id } },
+        { new: true }
+      );
+      return user;
     }
   },
 };
