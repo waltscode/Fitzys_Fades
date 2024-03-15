@@ -49,7 +49,7 @@ const resolvers = {
     //Update the signed in user's profile information
     updateUser: async (_, { id, user_name, email, phone, password }, context) => {
       if (!context.user) {
-        throw new AuthenticationError(
+        throw new Error(
           "You need to be logged in to update this profile!"
         );
       }
@@ -58,7 +58,7 @@ const resolvers = {
         throw new Error("User not found");
       }
       if (user.toString() !== context.user._id.toString()) {
-        throw new AuthenticationError(
+        throw new Error(
           "You don't have access to update this profile"
         );
       }
@@ -102,7 +102,7 @@ const resolvers = {
     //update the signed in user's appointment detail
     updateAppointment: async (_, { id, barber_name, date, time, service }, context) => {
       if (!context.user) {
-        throw new AuthenticationError(
+        throw new Error(
           "You need to be logged in to update this appointment!"
         );
       }
@@ -111,7 +111,7 @@ const resolvers = {
         throw new Error("Appointment not found");
       }
       if (appointment.user.toString() !== context.user._id.toString()) {
-        throw new AuthenticationError(
+        throw new Error(
           "You don't have access to update this appointment"
         );
       }

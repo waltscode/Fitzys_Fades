@@ -11,7 +11,7 @@ const appointmentSchema = new Schema({
     required: true, // selected from the calendar
   },
   time: {
-    type: Date,
+    type: String,
     required: true, // selected from the time slot thing
   },
   service: {
