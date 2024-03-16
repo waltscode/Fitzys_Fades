@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import PropTypes from 'prop-types';
 
 const LoginForm = ({ onClose }) => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -79,6 +80,10 @@ const LoginForm = ({ onClose }) => {
       </form>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  onClose: PropTypes.func.isRequired, // another prop validation for onClose
 };
 
 export default LoginForm;
