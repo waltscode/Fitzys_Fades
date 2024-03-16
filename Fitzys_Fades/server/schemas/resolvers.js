@@ -19,17 +19,26 @@ const resolvers = {
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
     },
-    me : async (_, args, context) => {
+    me: async (_, _, context) => {
       if (context.user) {
         return await User.findById(context.user._id).populate("appointments");
       }
       throw new AuthenticationError("You need to be logged in!");
-    }
+    },
     barberView: async (_, { userId }, context) => {
-       if (!context.user || context.user.role !== 'BARBER') {
-    throw new AuthenticationError("Authorized for barbers only");
-  }
-
+      if (!context.user || context.user.role !== 'BARBER') {
+        throw new AuthenticationError("Authorized for barbers only");
+      }
+      try {
+        const userAppointments = await User.findById(userId).populate("appointments");
+        if (!userAppointments) {
+          throw new Error("User not found.");
+        }
+        return userAppointments.appointments;
+      } catch (error) {
+        throw new Error("Error while fetching appointments.");
+      }
+    },
   },
 
   Mutation: {
