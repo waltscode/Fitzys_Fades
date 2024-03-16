@@ -40,7 +40,6 @@ const resolvers = {
       }
     },
   },
-
   Mutation: {
     createUser: async (_, { userInput }) => {
       const user = await User.create(userInput);
