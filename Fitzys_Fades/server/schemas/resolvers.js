@@ -25,6 +25,11 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     }
+    barberView: async (_, { userId }, context) => {
+       if (!context.user || context.user.role !== 'BARBER') {
+    throw new AuthenticationError("Authorized for barbers only");
+  }
+
   },
 
   Mutation: {
