@@ -1,110 +1,81 @@
 import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
 import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
+// signup form component
 const SignupForm = () => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+// handles form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
     try {
       const response = await createUser(userFormData);
-
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error('Something went wrong!');
       }
-
-      const { token, user } = await response.json();
-      console.log(user);
+      const { token } = await response.json();
       Auth.login(token);
+      navigate('/'); 
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-    });
   };
-
+// returns the signup form
   return (
-    <>
-      {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
+    <div className="mt-10 px-4 py-6">
+      {showAlert && (
+        <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+          Sign-up Err0r!
+        </div>
+      )}
+      <form onSubmit={handleFormSubmit} className="space-y-6">
+        <input
+          className="w-full p-2 border border-gray-300 rounded-md"
+          type="text"
+          placeholder="Username"
+          name="username"
+          onChange={handleInputChange}
+          value={userFormData.username}
+          required
+        />
+        <input
+          className="w-full p-2 border border-gray-300 rounded-md"
+          type="email"
+          placeholder="Email"
+          name="email"
+          onChange={handleInputChange}
+          value={userFormData.email}
+          required
+        />
+        <input
+          className="w-full p-2 border border-gray-300 rounded-md"
+          type="password"
+          placeholder="Password"
+          name="password"
+          onChange={handleInputChange}
+          value={userFormData.password}
+          required
+        />
+        <button
+          className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          type="submit"
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
-    </>
+        >
+          Sign Up
+        </button>
+      </form>
+    </div>
   );
 };
-
+// exports the signup form for use in nav bar
 export default SignupForm;
