@@ -3,34 +3,13 @@ import Calendar from "react-calendar";
 
 function Services() {
   const [dateSelected, setDate] = useState(new Date());
-  const [timeSelected, setTime] = useState("1200");
+  const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
   const [dateTimePanel, switchDateTimePanel] = useState("DATE"); // DATE | TIME
   const [serviceSelected, setService] = useState("");
   // const value = newDate()
   // function onChange(newValue) { value = newValue; changeThatPartOfTheHTML() }
   // useState returns an array of the value and the function to change the value in React state/memory and React html
-
-  function convertTimestampToTime(timestamp) {
-
-      // Create a new JavaScript Date object based on the timestamp
-      // multiplied by 1000 so that the argument is in milliseconds, not seconds
-      var date = new Date(timestamp);
-      
-      // Hours part from the timestamp
-      var hours = date.getHours();
-      
-      // Minutes part from the timestamp
-      var minutes = "0" + date.getMinutes();
-      
-      // Seconds part from the timestamp
-      var seconds = "0" + date.getSeconds();
-      
-      // Will display time in 10:30:23 format
-      var formattedTime = hours + ':' + minutes.substring(-2) + ':' + seconds.substring(-2);
-      
-      return formattedTime;
-  }
   
   useEffect(() => {
     console.log("CHANGED DATE: " + dateSelected);
@@ -41,8 +20,8 @@ function Services() {
   }, [serviceSelected]);
 
   useEffect(() => {
-    console.log("TIME STAMP:" + timeSelected.timeStamp)
-    console.log("TIME CHANGED: " + convertTimestampToTime(timeSelected.timeStamp));
+    //console.log("TIME STAMP:" + timeSelected.timeStamp)
+    console.log("TIME CHANGED: " + timeSelected);
   }, [timeSelected]);
   // form 1: runs everytime the page reloads or updates from state changes
   // form 2: runs only once when the page loads
@@ -50,7 +29,7 @@ function Services() {
 
   function submitAppointment() {
     const hrDate = dateSelected.toLocaleDateString();
-    const hrTime = convertTimestampToTime(timeSelected.timeStamp);
+    const hrTime = timeSelected;
     alert("Appointment scheduled for " + hrDate + " at " + hrTime + " for " + serviceSelected);
     // TODO: GraphQL mutation to add an appointment to the database
     // - Sending to graphQL: hrDate, hrTime, serviceSelected
@@ -82,7 +61,7 @@ function Services() {
               <input
                 type="time"
                 className="border border-gray-300 p-2 rounded w-full mb-4"
-                onChange={setTime} 
+                onChange={(event)=>{ setTime(event.target.value) }} 
               />
             </div>
             
@@ -152,6 +131,7 @@ function Services() {
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-8 mb-14"
             onClick={() => {
               setService("Straight Razor");
+              setModalOpened(true);
             }}
           >
             <div className="relative">
@@ -171,7 +151,10 @@ function Services() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14">
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
+              setService("Kidz Kutz");
+              setModalOpened(true);
+            }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -189,7 +172,10 @@ function Services() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14">
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
+              setService("Braid-UP");
+              setModalOpened(true);
+            }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -207,7 +193,10 @@ function Services() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14">
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
+              setService("Fitzys Fade");
+              setModalOpened(true);
+            }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -225,7 +214,10 @@ function Services() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14">
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
+              setService("Custom Designs");
+              setModalOpened(true);
+            }}>
             <div className="relative">
               <div className="relative">
                 <img
