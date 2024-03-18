@@ -19,12 +19,12 @@ const resolvers = {
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
     },
-    me : async (_, args, context) => {
+    me: async (_, args, context) => {
       if (context.user) {
         return await User.findById(context.user._id).populate("appointments");
       }
       throw new AuthenticationError("You need to be logged in!");
-    }
+    },
   },
 
   Mutation: {
@@ -45,9 +45,39 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createAppointment: async (parent, { barber_name, date, time, service}, context) => {
-      const appointment = await Appointment.create({barber_name,date,time,service})
-      const user = await User.findByIdAndUpdate(context.user._id,
+
+    //Update the signed in user's profile information
+    updateUser: async (_, args, context) => {
+      if (!context.user) {
+        throw new Error("You need to be logged in to update this profile!"); //have to uncomment this to work
+      }
+      const { id, user_name, email, phone, password} = args
+      const user = await User.findById(id);
+      if (!user) {
+        throw new Error("User not found");
+      }
+      if (user.toString() !== context.user._id.toString()) {
+        throw new Error("You don't have access to update this profile"); //have to uncomment this to work
+      }
+      const updatedArgs = { id, user_name, email, phone, password}
+      user.set(updatedArgs)
+      await user.save();
+      return user;
+    },
+
+    createAppointment: async (
+      parent,
+{ barber_name, date, time, service },
+      context
+    ) => {
+      const appointment = await Appointment.create({
+        barber_name,
+        date,
+        time,
+        service,
+      });
+      const user = await User.findByIdAndUpdate(
+        context.user._id,
         { $push: { appointments: appointment._id } },
         { new: true }
       );
@@ -55,23 +85,33 @@ const resolvers = {
     },
     deleteAppointment: async (parent, { id }, context) => {
       const appointment = await Appointment.findByIdAndDelete(id);
-      const user = await User.findByIdAndUpdate(context.user._id,
+      const user = await User.findByIdAndUpdate(
+        context.user._id,
         { $pull: { appointments: id } },
         { new: true }
       );
       return user;
-    }
+    },
+
+    //update the signed in user's appointment detail
+    updateAppointment: async (_, args, context) => {
+      if (!context.user) {
+        throw new Error("You need to be logged in to update this appointment!"); // have to uncomment this to work
+      }
+      const { barber_name, date, time, service } = args;
+      const appointment = await Appointment.findById(args.id);
+      if (!appointment) {
+        throw new Error("Appointment not found");
+      }
+      if (appointment.user.toString() !== context.user._id.toString()) {
+        throw new Error("You don't have access to update this appointment"); //have to uncomment this to work
+      }
+      const updatedArgs = { barber_name, date, time, service };
+      appointment.set(updatedArgs);
+      await appointment.save();
+      return appointment;
+    },
   },
 };
 
 module.exports = resolvers;
-
-// Create User - DONE
-// Get all User - DONE
-// Get one User - DONE
-// Update User
-// Create Appointment - DONE
-// Get all Appointment - DONE
-// Get one Appointment - DONE
-// Update Appointment
-// Delete Appointment

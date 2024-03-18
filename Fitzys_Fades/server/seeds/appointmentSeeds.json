@@ -1,0 +1,20 @@
+[
+  {
+    "barber_name": "JOHN_DOE",
+    "date": "2024-10-15",
+    "time": "14:30:00",
+    "service": "FADE"
+  },
+  {
+    "barber_name": "JANE_DAWN",
+    "date": "2024-10-20",
+    "time": "10:00:00",
+    "service": "CUT"
+  },
+  {
+    "barber_name": "WILLIAM_WILLIAMS",
+    "date": "2024-10-25",
+    "time": "16:00:00",
+    "service": "SHAVE"
+  }
+]

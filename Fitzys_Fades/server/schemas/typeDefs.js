@@ -48,13 +48,13 @@ const typeDefs = `
     me: User
   }
 
-
-
   type Mutation {
     createUser(userInput: UserInput!): Auth
     login(email: String!, password: String!): Auth
     createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
     deleteAppointment(id: ID!): User
+    updateAppointment(id:ID!, barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
+    updateUser(id:ID!, user_name: String!, email: String!, phone: String!, password: String!): User
   }
 `;
 
