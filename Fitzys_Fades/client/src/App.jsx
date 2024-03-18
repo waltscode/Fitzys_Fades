@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import backgroundImage from '/images/fitzshop.jpg'
-import './App.css';
+// import './App.css';
 import {
   ApolloClient,
   InMemoryCache,

@@ -25,8 +25,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-  },
 
+    // barberView: async (_, { userId }, context) => {
+    //   if (!context.user || context.user.role !== 'BARBER') {
+    //     throw new AuthenticationError("Authorized for barbers only");
+    //   }
+    //   try {
+    //     const userAppointments = await User.findById(userId).populate("appointments");
+    //     if (!userAppointments) {
+    //       throw new Error("User not found.");
+    //     }
+    //     return userAppointments.appointments;
+    //   } catch (error) {
+    //     throw new Error("Error while fetching appointments.");
+    //   }
+    // },
+
+
+  },
   Mutation: {
     createUser: async (_, { userInput }) => {
       const user = await User.create(userInput);
