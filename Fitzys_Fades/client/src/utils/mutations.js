@@ -13,3 +13,14 @@ mutation CreateUser($userInput: UserInput!) {
     }
   }
   `;
+
+export const CREATE_APPOINTMENT = gql`
+  mutation CreateAppointment($barberName: BarberEnum!, $date: String!, $time: String!, $service: String!) {
+    createAppointment(barber_name: $barberName, date: $date, time: $time, service: $service) {
+      barber_name
+      date
+      service
+      time
+    }
+  }
+`

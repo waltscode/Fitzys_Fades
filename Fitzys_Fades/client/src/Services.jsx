@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
+import {useMutation} from '@apollo/client';
+import { CREATE_APPOINTMENT } from './utils/mutations';
 
 function Services() {
   const [barberSelected, setBarber] = useState("JOHN_DOE");
@@ -8,6 +10,9 @@ function Services() {
   const [dateModalOpened, setModalOpened] = useState(false);
   const [dateTimePanel, switchDateTimePanel] = useState("DATE"); // DATE | TIME
   const [serviceSelected, setService] = useState("");
+
+  const [createAppointment] = useMutation(CREATE_APPOINTMENT);
+
   // const value = newDate()
   // function onChange(newValue) { value = newValue; changeThatPartOfTheHTML() }
   // useState returns an array of the value and the function to change the value in React state/memory and React html
@@ -32,6 +37,13 @@ function Services() {
     const hrDate = dateSelected.toLocaleDateString();
     const hrTime = timeSelected;
     alert("Appointment scheduled for " + hrDate + " at " + hrTime + " for " + serviceSelected + " with " + barberSelected + ".");
+    const appointment = {
+      barberName: barberSelected,
+      date: dateSelected,
+      time: timeSelected,
+      service: serviceSelected
+    }
+    createAppointment({variables: appointment});
     // TODO: GraphQL mutation to add an appointment to the database
     // - Sending to graphQL: hrDate, hrTime, serviceSelected
     // - Saves under that user.
