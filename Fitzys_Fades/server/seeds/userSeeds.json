@@ -1,0 +1,23 @@
+[
+  {
+    "user_name": "John Wick",
+    "email": "youkilledmydog@gmail.com",
+    "phone": "647-555-5555",
+    "password": "nobodykillsmydog",
+    "appointments": []
+  },
+  {
+  "user_name": "Norman Bates",
+  "email": "stabbystabby@gmail.com",
+  "phone": "647-555-1111",
+  "password": "w0nthurtafly",
+  "appointments": []
+  },
+  {
+    "user_name": "Norma Bate's Mom",
+    "email": "imnotdead@aol.com",
+    "phone": "647-555-1111",
+    "password": "mys0nwonthurtaFly",
+    "appointments": []
+  }
+]
