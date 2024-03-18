@@ -16,7 +16,6 @@ const appointmentSchema = new Schema({
   },
   service: {
     type: String,
-    enum: ['FADE', 'CUT', 'SHAVE'], // Allowed values for ServiceEnum
     required: true,
   },
 });

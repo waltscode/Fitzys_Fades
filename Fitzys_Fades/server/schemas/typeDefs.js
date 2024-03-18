@@ -5,11 +5,6 @@ const typeDefs = `
     WILLIAM_WILLIAMS
   }
 
-  enum ServiceEnum {
-    FADE
-    CUT
-    SHAVE
-  }
 
   type User {
     _id: ID!
@@ -25,7 +20,7 @@ const typeDefs = `
     barber_name: BarberEnum!
     date: String!
     time: String!
-    service: ServiceEnum!
+    service: String!
   }
 
   input UserInput {
@@ -51,7 +46,7 @@ const typeDefs = `
   type Mutation {
     createUser(userInput: UserInput!): Auth
     login(email: String!, password: String!): Auth
-    createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
+    createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: String!): Appointment
     deleteAppointment(id: ID!): User
     updateAppointment(id:ID!, barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
     updateUser(id:ID!, user_name: String!, email: String!, phone: String!, password: String!): User
