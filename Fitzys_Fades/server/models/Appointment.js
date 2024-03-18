@@ -7,16 +7,15 @@ const appointmentSchema = new Schema({
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true, // selected from the calendar
   },
   time: {
-    type: Date,
+    type: String,
     required: true, // selected from the time slot thing
   },
   service: {
     type: String,
-    enum: ['FADE', 'CUT', 'SHAVE'], // Allowed values for ServiceEnum
     required: true,
   },
 });

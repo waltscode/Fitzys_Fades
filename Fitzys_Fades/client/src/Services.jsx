@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 
 function Services() {
+  const [barberSelected, setBarber] = useState("JOHN_DOE");
   const [dateSelected, setDate] = useState(new Date());
   const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
@@ -30,7 +31,7 @@ function Services() {
   function submitAppointment() {
     const hrDate = dateSelected.toLocaleDateString();
     const hrTime = timeSelected;
-    alert("Appointment scheduled for " + hrDate + " at " + hrTime + " for " + serviceSelected);
+    alert("Appointment scheduled for " + hrDate + " at " + hrTime + " for " + serviceSelected + " with " + barberSelected + ".");
     // TODO: GraphQL mutation to add an appointment to the database
     // - Sending to graphQL: hrDate, hrTime, serviceSelected
     // - Saves under that user.
