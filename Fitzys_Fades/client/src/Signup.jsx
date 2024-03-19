@@ -6,7 +6,7 @@ import Auth from './utils/auth';
 import PropTypes from 'prop-types';
 
 const SignupForm = ({ onClose }) => {
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate(); 
 
