@@ -38,7 +38,7 @@ const SignupForm = ({ onClose }) => {
         createUser({
             variables: {
                 userInput: {
-                    username: userFormData.username,
+                    user_name: userFormData.username,
                     email: userFormData.email,
                     password: userFormData.password,
                     phone: userFormData.phone
