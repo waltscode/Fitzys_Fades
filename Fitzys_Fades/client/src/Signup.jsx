@@ -85,6 +85,15 @@ const SignupForm = ({ onClose }) => {
                     value={userFormData.password}
                     required
                 />
+                <input
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                    type="tel"
+                    placeholder="Phone"
+                    name="phone"
+                    onChange={handleInputChange}
+                    value={userFormData.phone}
+                    required
+                />
                 <button
                     className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                     type="submit"
