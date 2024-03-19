@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const SignupForm = ({ onClose }) => {
     const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
     const [showAlert, setShowAlert] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [createUser, { loading, error }] = useMutation(CREATE_USER, {
         onCompleted: (data) => {
@@ -16,7 +16,7 @@ const SignupForm = ({ onClose }) => {
             if (token) {
                 Auth.login(token);
                 if (onClose) onClose();
-                navigate('/'); 
+                navigate('/');
             } else {
                 throw new Error('Failed to create user');
             }
@@ -36,11 +36,14 @@ const SignupForm = ({ onClose }) => {
         event.preventDefault();
 
         createUser({
-            variables: { userInput: { 
-                username: userFormData.username, 
-                email: userFormData.email, 
-                password: userFormData.password 
-            }},
+            variables: {
+                userInput: {
+                    username: userFormData.username,
+                    email: userFormData.email,
+                    password: userFormData.password,
+                    phone: userFormData.phone
+                }
+            },
         });
     };
 
