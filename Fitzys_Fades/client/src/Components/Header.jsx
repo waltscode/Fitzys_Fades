@@ -38,6 +38,10 @@ function Header() {
       Contact
     </a>
   </li>
+              {/* {isLoggedIn ? ( //need to setup in auth
+              <li><button className="hover:text-gray-300" onClick={handleSignOut}>Sign Out</button></li>
+            ) : (
+              <> */}
   <li>
     <a className="hover:text-gray-300" href="/signup">
       Sign Up
