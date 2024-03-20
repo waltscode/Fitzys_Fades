@@ -2,10 +2,11 @@
 //import { Link } from "react-router-dom";
 import '../styles/Header.css';
 import headerImage from '/images/textstripe.jpg';
+import { useAuth } from '../utils/authContext';
 
 function Header() {
   //const [count, setCount] = useState(0)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
 
 
   return (
