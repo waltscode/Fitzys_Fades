@@ -5,6 +5,8 @@ import headerImage from '/images/textstripe.jpg';
 
 function Header() {
   //const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   return (
     <>

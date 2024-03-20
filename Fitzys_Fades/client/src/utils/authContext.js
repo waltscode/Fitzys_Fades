@@ -34,3 +34,9 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
+// props validation
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
