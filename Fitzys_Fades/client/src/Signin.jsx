@@ -1,27 +1,32 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../src/utils/mutations'; 
-import Auth from './utils/auth';
+// import Auth from './utils/auth';
 import PropTypes from 'prop-types';
+import { useAuth } from '../src/utils/authContext';
 
 const LoginForm = ({ onClose }) => {
+   const { login } = useAuth();
+   const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [showAlert, setShowAlert] = useState(false);
-  const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
-    onCompleted: (data) => {
-      const { token } = data.loginUser;
-      if (token) {
-        Auth.login(token);
-        onClose();
-      } else {
-        throw new Error('Login failed, no token returned');
-      }
-    },
-    onError: (error) => {
-      console.error('Login error:', error);
-      setShowAlert(true);
+const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
+  onCompleted: (data) => {
+    const { token } = data.login;
+    if (token) {
+      login(token);
+      if (typeof onClose === 'function') onClose();
+      navigate('/'); 
+    } else {
+      throw new Error('Login failed, no token returned');
     }
-  });
+  },
+  onError: (error) => {
+    console.error('Login error:', error);
+    setShowAlert(true);
+  }
+});
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -87,8 +92,8 @@ const LoginForm = ({ onClose }) => {
   );
 };
 
-LoginForm.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+// LoginForm.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+// };
 
 export default LoginForm;

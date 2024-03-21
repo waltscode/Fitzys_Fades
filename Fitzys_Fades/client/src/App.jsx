@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import backgroundImage from '/images/fitzshop.jpg'
+import { AuthProvider } from '../src/utils/authContext';
 
 import {
   ApolloClient,
@@ -39,6 +40,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client = {client}>
+      <AuthProvider>
       <Header />
       <div className="" style={{ 
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), linear-gradient(rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.1)), url(${backgroundImage})`,
@@ -50,6 +52,7 @@ function App() {
           <Outlet />
       </div>
       <Footer/>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

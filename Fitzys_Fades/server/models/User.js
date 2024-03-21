@@ -17,7 +17,7 @@ const userSchema = new Schema({
     type: String,  //to account for special characters
     required: true,
     unique: false,
-    match: [/\d{3}[-.]\d{3}[-.]\d{4}/, 'Must match a phone number!'],
+    match: [/^(\d{3}[-.]\d{3}[-.]\d{4})|(\d{10})$/, 'Must match a phone number!'],
   },
   password: {
     type: String,
