@@ -4,8 +4,11 @@ import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../src/utils/mutations';
 import Auth from './utils/auth';
 import PropTypes from 'prop-types';
+import { useAuth } from '../src/utils/authContext';
+
 
 const SignupForm = ({ onClose }) => {
+    const { login } = useAuth();
     const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
@@ -14,7 +17,7 @@ const SignupForm = ({ onClose }) => {
         onCompleted: (data) => {
             const { token } = data.createUser;
             if (token) {
-                Auth.login(token);
+                login(token);
                 if (onClose) onClose();
                 navigate('/');
             } else {
