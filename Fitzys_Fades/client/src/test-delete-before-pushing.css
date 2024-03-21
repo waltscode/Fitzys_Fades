@@ -1,0 +1,16 @@
+.contact-item{
+    display: flex;
+}
+
+.icon{
+    max-width: 2rem;
+}
+
+.location-image{
+    max-width: 15rem;
+}
+
+.contact-upper{
+    display: flex;
+    gap: 1rem;
+}
