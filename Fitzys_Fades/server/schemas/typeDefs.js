@@ -5,6 +5,11 @@ const typeDefs = `
     WILLIAM_WILLIAMS
   }
 
+  enum ServiceEnum {
+    FADE
+    CUT
+    SHAVE
+  }
 
   type User {
     _id: ID!

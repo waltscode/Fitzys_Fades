@@ -6,9 +6,9 @@ import Auth from './utils/auth';
 import PropTypes from 'prop-types';
 
 const SignupForm = ({ onClose }) => {
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
     const [showAlert, setShowAlert] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [createUser, { loading, error }] = useMutation(CREATE_USER, {
         onCompleted: (data) => {
@@ -16,7 +16,7 @@ const SignupForm = ({ onClose }) => {
             if (token) {
                 Auth.login(token);
                 if (onClose) onClose();
-                navigate('/'); 
+                navigate('/');
             } else {
                 throw new Error('Failed to create user');
             }
@@ -36,11 +36,14 @@ const SignupForm = ({ onClose }) => {
         event.preventDefault();
 
         createUser({
-            variables: { userInput: { 
-                username: userFormData.username, 
-                email: userFormData.email, 
-                password: userFormData.password 
-            }},
+            variables: {
+                userInput: {
+                    user_name: userFormData.username,
+                    email: userFormData.email,
+                    password: userFormData.password,
+                    phone: userFormData.phone
+                }
+            },
         });
     };
 
@@ -80,6 +83,15 @@ const SignupForm = ({ onClose }) => {
                     name="password"
                     onChange={handleInputChange}
                     value={userFormData.password}
+                    required
+                />
+                <input
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                    type="tel"
+                    placeholder="Phone"
+                    name="phone"
+                    onChange={handleInputChange}
+                    value={userFormData.phone}
                     required
                 />
                 <button
