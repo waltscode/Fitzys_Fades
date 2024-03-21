@@ -7,6 +7,7 @@ import { useAuth } from '../src/utils/authContext';
 
 const LoginForm = ({ onClose }) => {
    const { login } = useAuth();
+   const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
@@ -14,7 +15,8 @@ const LoginForm = ({ onClose }) => {
       const { token } = data.loginUser;
       if (token) {
         login(token);
-        onClose();
+        if (typeof onClose === 'function') onClose();
+        navigate('/');
       } else {
         throw new Error('Login failed, no token returned');
       }
