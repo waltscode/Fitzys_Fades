@@ -26,8 +26,8 @@ export const CREATE_APPOINTMENT = gql`
   }
 `
   export const LOGIN_USER = gql`
-  mutation LoginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       token
     }
   }
