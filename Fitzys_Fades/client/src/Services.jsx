@@ -8,14 +8,12 @@ function Services() {
   const [dateSelected, setDate] = useState(new Date());
   const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
-  const [dateTimePanel, switchDateTimePanel] = useState("DATE"); // DATE | TIME
+  const [dateTimePanel, switchDateTimePanel] = useState("DATE"); 
   const [serviceSelected, setService] = useState("");
 
   const [createAppointment] = useMutation(CREATE_APPOINTMENT);
 
-  // const value = newDate()
-  // function onChange(newValue) { value = newValue; changeThatPartOfTheHTML() }
-  // useState returns an array of the value and the function to change the value in React state/memory and React html
+  
   
   useEffect(() => {
     console.log("CHANGED DATE: " + dateSelected);
@@ -26,12 +24,10 @@ function Services() {
   }, [serviceSelected]);
 
   useEffect(() => {
-    //console.log("TIME STAMP:" + timeSelected.timeStamp)
+ 
     console.log("TIME CHANGED: " + timeSelected);
   }, [timeSelected]);
-  // form 1: runs everytime the page reloads or updates from state changes
-  // form 2: runs only once when the page loads
-  // form 3: runs when a variable changes (in that array)
+
 
   function submitAppointment() {
     const hrDate = dateSelected.toLocaleDateString();
@@ -44,9 +40,7 @@ function Services() {
       service: serviceSelected
     }
     createAppointment({variables: appointment});
-    // TODO: GraphQL mutation to add an appointment to the database
-    // - Sending to graphQL: hrDate, hrTime, serviceSelected
-    // - Saves under that user.
+  
     setModalOpened(false);
   }
 
@@ -58,8 +52,8 @@ function Services() {
           (dateModalOpened ? "" : " hidden")
         }
       >
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <p className="text-gray-700 mb-4">
+        <div className="bg-blue-200 rounded-lg shadow-lg p-6">
+          <p className="text-gray-700 mb-10">
             <strong>Service:</strong> {serviceSelected}
             <br></br>
             { 
