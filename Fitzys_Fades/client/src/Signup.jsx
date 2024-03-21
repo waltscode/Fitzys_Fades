@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../src/utils/mutations';
-import Auth from './utils/auth';
+// import Auth from './utils/auth';
 import PropTypes from 'prop-types';
 import { useAuth } from '../src/utils/authContext';
 

@@ -3,15 +3,17 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../src/utils/mutations'; 
 import Auth from './utils/auth';
 import PropTypes from 'prop-types';
+import { useAuth } from '../src/utils/authContext';
 
 const LoginForm = ({ onClose }) => {
+   const { login } = useAuth();
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       const { token } = data.loginUser;
       if (token) {
-        Auth.login(token);
+        login(token);
         onClose();
       } else {
         throw new Error('Login failed, no token returned');
