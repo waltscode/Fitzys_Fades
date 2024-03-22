@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../src/utils/mutations';
 // import Auth from './utils/auth';
@@ -105,6 +105,7 @@ const SignupForm = ({ onClose }) => {
                     Sign Up
                 </button>
             </form>
+            <Link to = "/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
         </div>
     );
 };

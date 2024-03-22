@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import {useMutation} from '@apollo/client';
 import { CREATE_APPOINTMENT } from './utils/mutations';
-
+import { useNavigate } from "react-router-dom";
+import {useAuth} from './utils/authContext';
 function Services() {
+  const barbers = ['JOHN_DOE', 'JANE_DAWN', 'WILLIAM_WILLIAMS'];
   const [barberSelected, setBarber] = useState("JOHN_DOE");
   const [dateSelected, setDate] = useState(new Date());
   const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
   const [dateTimePanel, switchDateTimePanel] = useState("DATE"); 
   const [serviceSelected, setService] = useState("");
+  const navigate = useNavigate();
 
   const [createAppointment] = useMutation(CREATE_APPOINTMENT);
 
-  
+  const {isLoggedIn} = useAuth();
   
   useEffect(() => {
     console.log("CHANGED DATE: " + dateSelected);
@@ -27,6 +30,14 @@ function Services() {
  
     console.log("TIME CHANGED: " + timeSelected);
   }, [timeSelected]);
+
+  const handleServiceSelection = (service) => { 
+    if (!isLoggedIn)  {
+    return navigate ('/signin');
+  }
+  setService(service);
+  setModalOpened(true);
+};
 
 
   function submitAppointment() {
@@ -114,8 +125,7 @@ function Services() {
           <div
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"
             onClick={() => {
-              setService("Traditional");
-              setModalOpened(true);
+              handleServiceSelection('Traditional')
             }}
           >
             <div className="relative">
@@ -138,8 +148,7 @@ function Services() {
           <div
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-8 mb-14"
             onClick={() => {
-              setService("Straight Razor");
-              setModalOpened(true);
+              handleServiceSelection("Straight Razor");
             }}
           >
             <div className="relative">
@@ -160,8 +169,7 @@ function Services() {
           </div>
 
           <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-              setService("Kidz Kutz");
-              setModalOpened(true);
+             handleServiceSelection("Kidz Kutz");
             }}>
             <div className="relative">
               <div className="relative">
@@ -181,8 +189,7 @@ function Services() {
           </div>
 
           <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-              setService("Braid-UP");
-              setModalOpened(true);
+             handleServiceSelection("Braid-UP")
             }}>
             <div className="relative">
               <div className="relative">
@@ -202,8 +209,7 @@ function Services() {
           </div>
 
           <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-              setService("Fitzys Fade");
-              setModalOpened(true);
+              handleServiceSelection("Fitzys Fade")
             }}>
             <div className="relative">
               <div className="relative">
@@ -223,8 +229,7 @@ function Services() {
           </div>
 
           <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-              setService("Custom Designs");
-              setModalOpened(true);
+             handleServiceSelection("Custom Design")
             }}>
             <div className="relative">
               <div className="relative">
