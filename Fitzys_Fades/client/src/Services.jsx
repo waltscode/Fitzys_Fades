@@ -109,6 +109,7 @@ function Services() {
 
       <main>
         <h2 className="text-center text-4xl font-semibold">Our Services</h2>
+        <h3 className="text-center text-4xl font-semibold">Click on the desired service to set up your appointment</h3>
         <div className="flex flex-wrap justify-center">
           <div
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"

@@ -36,7 +36,8 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    //on logout, redirects user back to landing page.
+    window.location.reload('/');
   }
 }
 
