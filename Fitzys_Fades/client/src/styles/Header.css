@@ -18,3 +18,10 @@
   .border-image-source {
     border-image-source: url('/Fitzys_Fades/client/public/images/textstripe.jpg');
   }
+
+  body.service-bkg{
+    background-image: url('images/barber_chair.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
