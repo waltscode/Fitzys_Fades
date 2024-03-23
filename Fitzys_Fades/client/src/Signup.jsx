@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useAuth } from '../src/utils/authContext';
 
 
-const SignupForm = ({ onClose }) => {
+const SignupForm = () => {
     const { login } = useAuth();
     const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
     const [showAlert, setShowAlert] = useState(false);
@@ -18,7 +18,7 @@ const SignupForm = ({ onClose }) => {
             const { token } = data.createUser;
             if (token) {
                 login(token);
-                if (onClose) onClose();
+                // if (onClose) onClose();
                 navigate('/');
             } else {
                 throw new Error('Failed to create user');
@@ -59,7 +59,7 @@ const SignupForm = ({ onClose }) => {
             )}
             {loading && <p>Loading...</p>}
             {error && <p>An err0r occurred: {error.message}</p>}
-            <button onClick={onClose} className="absolute top-0 right-0 p-4">X</button>
+            {/* <button onClick={onClose} className="absolute top-0 right-0 p-4">X</button> */}
             <form onSubmit={handleFormSubmit} className="space-y-6">
                 <input
                     className="w-full p-2 border border-gray-300 rounded-md"
