@@ -1,13 +1,17 @@
 const db = require('../config/connection')
-const {User, Appointment} = require('../models')
+const {User, Appointment, Message} = require('../models')
 const userSeeds = require('./userSeeds.json')
 const appointmentSeeds = require('./appointmentSeeds.json')
+const messageSeeds = require('./messageSeeds')
 const fitzysFadesdb = require('./fitzysFadesdb')
 
 db.once('open', async () => {
     try {
       await fitzysFadesdb('Appointment', 'appointments');
       await fitzysFadesdb('User', 'users');
+      await fitzysFadesdb('Message', 'messages')
+
+      await Message.create(messageSeeds);
   
       await User.create(userSeeds);
       
@@ -27,6 +31,6 @@ db.once('open', async () => {
       process.exit(1);
     }
   
-    console.log('All appointments have been randomly assigned to users.');
+    console.log('All appointments have been randomly assigned to users. Messages seeded.');
     process.exit(0);
   });
