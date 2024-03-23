@@ -1,4 +1,4 @@
-const { User, Appointment } = require("../models");
+const { User, Appointment, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/Auth");
 
 const resolvers = {
@@ -11,6 +11,8 @@ const resolvers = {
     user: async (_, { id }) => {
       return await User.findById(id).populate("appointments");
     },
+
+    //I think get all appointments will need an added authentication check so only barbers can see all the appointments
     // Get all appointments
     appointments: async () => {
       return await Appointment.find({});
@@ -18,6 +20,22 @@ const resolvers = {
     // Get a single appointment by ID
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
+    },
+    //  Get all messages
+    messages: async (_,__,context) => {
+      //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
+      // if (!context.user.isBarber){
+      //   throw new AuthenticationError("You don't not have permission to view messages")
+      // }
+      return await Message.find({});
+    },
+    // Get a single message by ID
+    message: async (_, { id }, context) => {
+      //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
+      if (!context.user.isBarber){
+        throw new AuthenticationError("You don't not have permission to view this message")
+      }
+      return await Message.findById(id);
     },
     me: async (_, args, context) => {
       if (context.user) {
@@ -48,6 +66,11 @@ const resolvers = {
       const user = await User.create(userInput);
       const token = signToken(user);
       return { token, user };
+    },
+    // Creates a message and adds to the database
+    createMessage: async (_, {name, email, message}) => {
+      const sentMessage = await Message.create({name, email, message})
+      return {sentMessage}
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
@@ -107,6 +130,19 @@ const resolvers = {
         { new: true }
       );
       return user;
+    },
+
+    //Deletes a message, authentication check is required so that only barbers can delete the message
+    deleteMessage: async (parent, { id }, context) => {
+      // if (!context.user.isBarber) {
+      //   throw new AuthenticationError("You don't have permission to delete messages.");
+      // }
+      const deletedMessage = await Message.findByIdAndDelete(id);
+      if (!deletedMessage) {
+        throw new Error("Message not found.");
+      }
+      const remainingMessages = await Message.find({});
+      return { messages: remainingMessages };
     },
 
     //update the signed in user's appointment detail

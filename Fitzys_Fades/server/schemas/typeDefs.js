@@ -46,13 +46,24 @@ const typeDefs = `
     appointments: [Appointment]
     appointment(id: ID): Appointment
     me: User
+    messages: [Message]
+    message(id: ID!): Message
+  }
+
+  type Message {
+    _id: ID!
+    name: String!
+    email: String!
+    message: String!
   }
 
   type Mutation {
     createUser(userInput: UserInput!): Auth
+    createMessage (name: String!, email: String!, message: String!): Message
     login(email: String!, password: String!): Auth
     createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: String!): Appointment
     deleteAppointment(id: ID!): User
+    deleteMessage(id: ID!): Message
     updateAppointment(id:ID!, barber_name: BarberEnum!, date: String!, time: String!, service: ServiceEnum!): Appointment
     updateUser(id:ID!, user_name: String!, email: String!, phone: String!, password: String!): User
   }
