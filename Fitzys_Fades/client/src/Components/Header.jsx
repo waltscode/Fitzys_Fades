@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 //import { Link } from "react-router-dom";
-import React from 'react';
+// import React from 'react';
 import '../styles/Header.css';
 import headerImage from '/images/textstripe.jpg';
 import { useAuth } from '../utils/authContext';
@@ -22,6 +22,7 @@ function Header() {
         </div>
         <nav className="flex items-center">
           <ul className="flex space-x-4 text-white">
+            <li><a className="hover:text-gray-300" href="/">Home</a></li>
             <li><a className="hover:text-gray-300" href="/about">About us</a></li>
             <li><a className="hover:text-gray-300" href="/services">Services</a></li>
             <li><a className="hover:text-gray-300" href="/contact">Contact</a></li>
