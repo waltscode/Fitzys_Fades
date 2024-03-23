@@ -6,6 +6,7 @@ import Services from './Services.jsx'
 import Contact from './Contact.jsx'
 import Signup from './Signup.jsx'
 import Signin from './Signin.jsx'
+import LandingPage from './LandingPage.jsx'
 
 import './index.css'
 import './styles/Header.css'
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
+      {
+        index: true,
+        element: < LandingPage/>
+      },
       {
         path: '/about',
         element: <About />,
