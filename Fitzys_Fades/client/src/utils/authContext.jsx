@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
             // update authState
             setAuthState({
                 isLoggedIn,
-                userProfile: userProfile.data, // added .data to userProfile so i could acess the nested object, when i create the user object in the backend, i nest the user object in a data object. Probably not the best solution, but it works for now.
+                 userProfile: userProfile ? userProfile.data : null, // added .data to userProfile so i could acess the nested object, when i create the user object in the backend, i nest the user object in a data object. Probably not the best solution, but it works for now.
             });
         };
 
