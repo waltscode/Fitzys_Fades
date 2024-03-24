@@ -18,6 +18,11 @@ export const GET_ALL_APPOINTMENTS = gql`
       date
       time
       service
+      user {
+        _id
+        user_name
+        email
+      }
     }
   }
 `;
