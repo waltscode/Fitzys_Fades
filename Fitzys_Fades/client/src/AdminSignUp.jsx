@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../src/utils/mutations';
+import { CREATE_ADMIN_USER } from '../src/utils/mutations';
 import { useAuth } from '../src/utils/authContext';
 
 const SignupForm = () => {
@@ -10,9 +10,9 @@ const SignupForm = () => {
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
 
-    const [createUser, { loading, error }] = useMutation(CREATE_USER, {
+    const [createAdminUser, { loading, error }] = useMutation(CREATE_ADMIN_USER, {
         onCompleted: (data) => {
-            const { token } = data.createUser;
+            const { token } = data.createAdminUser;
             if (token) {
                 login(token);
                 navigate('/');
@@ -34,16 +34,15 @@ const SignupForm = () => {
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
-        createUser({
+        createAdminUser({
             variables: {
                 userInput: {
                     user_name: userFormData.username,
                     email: userFormData.email,
                     password: userFormData.password,
-                    phone: userFormData.phone,
-                    role: userFormData.role,
-                    adminKey: userFormData.adminKey  // admin key
-                }
+                    phone: userFormData.phone
+                },
+                adminKey: userFormData.adminKey // admin key value
             },
         });
     };
