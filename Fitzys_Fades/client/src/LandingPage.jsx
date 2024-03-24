@@ -24,7 +24,7 @@ function LandingPage() {
 return (
   <>
     <section className="contact-container flex flex-col items-center justify-center pt-8">
-      <h2 className="text-7xl font-bold mb-4 text-blue-100"
+      <h2 className="text-7xl font-bold mb-4 text-white"
   style={{
     textShadow: '0 0 3px #000, 0 0 5px #000' // adds embossed effect
   }}

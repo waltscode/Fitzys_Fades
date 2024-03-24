@@ -43,7 +43,7 @@ const AppointmentsList = () => {
     </div>
 
     {sortedAppointments.map(({ _id, barber_name, date, time, service, user }) => (
-        <div key={_id} className="bg-white shadow-md rounded p-4">
+        <div key={_id} className="bg-blue-100 shadow-md rounded p-4">
             <p className="font-semibold">Barber: {barber_name}</p>
             <p>Service: {service}</p>
             <p>Date: {date}</p>
