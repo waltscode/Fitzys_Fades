@@ -8,29 +8,41 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const authService = new AuthService();
-    const [isLoggedIn, setIsLoggedIn] = useState(authService.loggedIn());
+        const [authState, setAuthState] = useState({
+        isLoggedIn: authService.loggedIn(),
+        userProfile: authService.getProfile(),
+    });
 
     useEffect(() => {
-        // Check auth state on mount
-        setIsLoggedIn(authService.loggedIn());
+        // auth state on mount
+       setAuthState({
+            isLoggedIn: authService.loggedIn(),
+            userProfile: authService.getProfile(),
+        });
     }, []);
 
     const login = (idToken) => {
         authService.login(idToken);
-        setIsLoggedIn(true);
+        setAuthState({
+            isLoggedIn: true,
+            userProfile: authService.getProfile(),
+        });
     };
 
     const logout = () => {
         authService.logout();
-        setIsLoggedIn(false);
+        setAuthState({
+            isLoggedIn: false,
+            userProfile: null,
+        });
     };
 
-    const getProfile = () => {
-        return authService.getProfile();
-    };
+    // const getProfile = () => {
+    //     return authService.getProfile();
+    // };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout, getProfile }}>
+        <AuthContext.Provider value={{ ...authState, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
