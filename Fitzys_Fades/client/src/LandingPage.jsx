@@ -15,11 +15,27 @@ function LandingPage() {
     </section>
   );
 
+  // conditional rendering placeholder for admin panel to view all appointments
+  // {userRole === 'admin' && <AdminPanel />}
+
+//   const AdminRoute = ({ component: Component, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={props =>
+//       userRole === 'admin' ? (
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to={{ pathname: '/login' }} />
+//       )
+//     }
+//   />
+// );
+
   // return (
 
   //   <>
   //     <main>
-  //       <h2>Contact Us</h2>
+  //       <h2>All Customer Appointments</h2>
   //     </main>
   //   </>
   // )
