@@ -33,7 +33,6 @@ function LandingPage() {
       {/* conditional rendering for appointment list */}
       {userRole === 'admin' && (
         <section>
-          <h2>All Customer Appointments</h2>
           <AppointmentsList />
         </section>
       )}
