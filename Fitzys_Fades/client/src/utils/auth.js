@@ -4,7 +4,18 @@ import { jwtDecode } from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    return jwtDecode(this.getToken());
+      const token = this.getToken();
+      if (!token) {
+          // if token is null
+          console.log('Token is null, indicating not logged in or cleared.');
+          return null;
+      }
+      try {
+          return jwtDecode(token);
+      } catch (error) {
+          console.error("Error decoding token:", error);
+          return null;
+      }
   }
 
   loggedIn() {

@@ -9,23 +9,33 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     const authService = new AuthService();
         const [authState, setAuthState] = useState({
-        isLoggedIn: authService.loggedIn(),
-        userProfile: authService.getProfile(),
+        isLoggedIn: false,
+        userProfile: null,
     });
 
     useEffect(() => {
-        // auth state on mount
-       setAuthState({
-            isLoggedIn: authService.loggedIn(),
-            userProfile: authService.getProfile(),
-        });
+        const initializeAuthState = async () => {
+            // Fetch initial authentication state
+            const isLoggedIn = authService.loggedIn();
+            const userProfile = authService.getProfile();
+            
+            // update authState
+            setAuthState({
+                isLoggedIn,
+                userProfile,
+            });
+        };
+        
+        initializeAuthState();
     }, []);
 
-    const login = (idToken) => {
-        authService.login(idToken);
+    const login = async (idToken) => {
+        authService.login(idToken); 
+        const isLoggedIn = authService.loggedIn();
+        const userProfile = authService.getProfile();
         setAuthState({
-            isLoggedIn: true,
-            userProfile: authService.getProfile(),
+            isLoggedIn,
+            userProfile,
         });
     };
 
