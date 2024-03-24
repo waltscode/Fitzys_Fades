@@ -22,11 +22,16 @@ const AppointmentsList = () => {
     <div>
       <h2>All Customer Appointments</h2>
       <ul>
-        {data.appointments.map(({ _id, barber_name, date, time, service }) => (
-          <li key={_id}>
-            Barber: {barber_name}, Service: {service}, Date: {date}, Time: {time}
-          </li>
-        ))}
+                {data.appointments.map(({ _id, barber_name, date, time, service, user }) => (
+                <li key={_id}>
+                    Barber: {barber_name}, Service: {service}, Date: {date}, Time: {time}
+                    {user && (
+                    <>
+                        , User Name: {user.user_name}, Email: {user.email}
+                    </>
+                    )}
+                </li>
+                ))}
       </ul>
     </div>
   );
