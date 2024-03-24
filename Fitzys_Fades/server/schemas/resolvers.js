@@ -1,6 +1,8 @@
 const { User, Appointment, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/Auth");
 
+const ADMIN_KEY = process.env.ADMIN_KEY || 'secret_admin_key_here';
+
 const resolvers = {
   Query: {
     // Get all users with appointments populated
@@ -16,7 +18,7 @@ const resolvers = {
     // Get all appointments
     appointments: async (_, args, context) => {
       if (!context.user || context.user.role !== 'admin') {
-        throw new Error('Not authorized or not an admin.');
+        throw new Error('Not a barber.');
       }
       // not sure if i need to include arguments in the function to get all appointments
 
@@ -68,8 +70,13 @@ const resolvers = {
 
   },
   Mutation: {
-    createUser: async (_, { userInput }) => {
-      const user = await User.create(userInput);
+    createUser: async (_, { userInput, adminKey }) => {
+
+      let role = 'user'; // Default role
+      if (adminKey && adminKey === ADMIN_KEY) {
+        role = 'admin';
+      }
+      const user = await User.create(...userInput, role);
       const token = signToken(user);
       return { token, user };
     },
