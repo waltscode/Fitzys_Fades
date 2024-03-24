@@ -16,15 +16,21 @@ function LandingPage() {
     console.log('User role:', userRole);
   }, [userProfile, userRole]);
 
-  if (!userProfile) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <img src={leftImage} alt="Left Decorative" className="w-20 mr-4" /> 
-        <p>Loading...</p>
-        <img src={rightImage} alt="Right Decorative" className="w-20 ml-4" /> 
+if (!userProfile) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <img src={leftImage} alt="Left Decorative" className="w-66 mr-10" /> 
+      
+      <div className="flex flex-col items-center text-white"> 
+        <p className="text-4xl mb-8">Welcome to Fitzy's</p> 
+        <p className="text-3xl">Check out our Services!</p> 
       </div>
-    );
-  }
+
+      <img src={rightImage} alt="Right Decorative" className="w-66 ml-10" style={{ transform: 'rotate(180deg)' }} /> 
+    </div>
+  );
+}
+
 
   return (
     <>
