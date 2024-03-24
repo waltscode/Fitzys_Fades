@@ -24,7 +24,7 @@ function LandingPage() {
 return (
   <>
     <section className="contact-container flex flex-col items-center justify-center pt-8">
-      <h2 className="text-2xl font-bold mb-4 text-white">Greetings Valued Customer #267189!</h2> {/* placeholder for username */}
+      <h2 className="text-2xl font-bold mb-4 text-white">Welcome To Fitzy's!</h2> {/* placeholder for username which will displayed */}
       <section className="locationimg-card max-w-md pt-10">
         <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
       </section>
@@ -36,7 +36,9 @@ return (
         <AppointmentsList />
       </section>
     ) : (
-      <p className="text-center text-white pt-20">You're now logged in!</p>
+      <p className="text-center text-white pt-20">Greetings Customer #189123198 -- You're now logged in!</p>
+      
+       //placeholder for user stuff will implement a user dashboard to display user appointments, perhaps also a link to the Services page
     )}
   </>
 );
