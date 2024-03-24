@@ -32,9 +32,9 @@ const AppointmentsList = () => {
 
     return (
         <div className="container md:max-h-[408px] px-16 h-screen overflow-y-auto mx-auto">
-            <h2 className="text-2xl font-bold mb-4 text-center text-white">All Customer Appointments</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center text-white" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>All Customer Appointments</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <label htmlFor="orderBy" className="block text-sm font-medium text-white 500">Order By:</label>
+                <label htmlFor="orderBy" className="block text-sm font-medium text-white 500"style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Order By:</label>
                 <select id="orderBy" name="orderBy" className="mt-1 block w-full p-2 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" onChange={handleOrderByChange}>
                     <option value="date">Date</option>
                     {/* <option value="username">Customer Name</option> */} {/*uncomment this after clearing GraphQL otherwise it will throw errors*/}

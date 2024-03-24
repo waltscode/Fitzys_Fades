@@ -43,7 +43,7 @@ if (!userProfile) {
       {/* conditional rendering for non-admin greeting and image */}
       {(userRole !== 'admin') && (
         <section className="flex flex-col items-center justify-center">
-          <p className="text-center text-white pt-20">Greetings Customer #189123198 -- You're now logged in!</p>
+          <p className="text-center text-white pt-20"style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Greetings Customer #189123198 -- You're now logged in!</p>
           <section className="locationimg-card max-w-md pt-10">
             <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
           </section>
