@@ -70,16 +70,19 @@ const resolvers = {
 
   },
   Mutation: {
-    createUser: async (_, { userInput, adminKey }) => {
-
-      let role = 'user'; // Default role
-      if (adminKey && adminKey === ADMIN_KEY) {
-        role = 'admin';
-      }
-      const user = await User.create( ...userInput, role );
+   createUser: async (_, { userInput }) => {
+      const user = await User.create(userInput);
       const token = signToken(user);
       return { token, user };
-    },
+  },
+    createAdminUser: async (_, { userInput, adminKey }) => {
+    if (adminKey !== ADMIN_KEY) {
+      throw new Error('Unauthorized: Admin key is invalid.');
+    }
+    const user = await User.create({ ...userInput, role: 'admin' });
+    const token = signToken(user);
+    return { token, user };
+  },
     // Creates a message and adds to the database
     createMessage: async (_, { name, email, message }) => {
       const sentMessage = await Message.create({ name, email, message })
@@ -94,9 +97,13 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
+      const isAdmin = user.role === 'admin'; 
+      
       const token = signToken(user);
-      return { token, user };
+
+      return { token, user: { ...user.toObject(), isAdmin } };
     },
+
 
     //Update the signed in user's profile information
     updateUser: async (_, args, context) => {
@@ -122,11 +129,13 @@ const resolvers = {
       { barber_name, date, time, service },
       context
     ) => {
+      const { _id, user_name, email } = context.user;
       const appointment = await Appointment.create({
         barber_name,
         date,
         time,
         service,
+        user: { _id, user_name, email },
       });
       const user = await User.findByIdAndUpdate(
         context.user._id,
