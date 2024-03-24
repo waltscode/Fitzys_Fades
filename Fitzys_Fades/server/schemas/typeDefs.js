@@ -10,6 +10,7 @@ const typeDefs = `
     CUT
     SHAVE
   }
+  
 
   type User {
     _id: ID!
@@ -18,6 +19,7 @@ const typeDefs = `
     phone: String!
     password: String!
     appointments: [Appointment]
+    role: String
   }
 
   type Appointment {

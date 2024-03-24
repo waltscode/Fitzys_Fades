@@ -1,7 +1,7 @@
 const { User, Appointment, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/Auth");
 
-const ADMIN_KEY = process.env.ADMIN_KEY || 'secret_admin_key_here';
+const ADMIN_KEY = process.env.ADMIN_KEY || '1234567890'; // for demo or dev only
 
 const resolvers = {
   Query: {
@@ -76,7 +76,7 @@ const resolvers = {
       if (adminKey && adminKey === ADMIN_KEY) {
         role = 'admin';
       }
-      const user = await User.create(...userInput, role);
+      const user = await User.create( ...userInput, role );
       const token = signToken(user);
       return { token, user };
     },
