@@ -24,7 +24,13 @@ function LandingPage() {
 return (
   <>
     <section className="contact-container flex flex-col items-center justify-center pt-8">
-      <h2 className="text-2xl font-bold mb-4 text-white">Welcome To Fitzy's!</h2> {/* placeholder for username which will displayed */}
+      <h2 className="text-7xl font-bold mb-4 text-blue-100"
+  style={{
+    textShadow: '0 0 3px #000, 0 0 5px #000' // adds embossed effect
+  }}
+>
+  Welcome To Fitzy's!
+</h2>{/* placeholder for username which will displayed */}
       <section className="locationimg-card max-w-md pt-10">
         <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
       </section>
