@@ -105,9 +105,10 @@ const SignupForm = () => {
                     Sign Up
                 </button>
             </form>
-            <Link to = "/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
-            <br />
-            <Link to = "/adminsignup" className="text-blue-500 hover:underline">Work for us?</Link>
+                <div className="flex justify-between items-center">
+                    <Link to="/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
+                    <Link to="/adminsignup" className="text-blue-500 hover:underline">Work for us?</Link>
+                    </div>
         </div>
     );
 };

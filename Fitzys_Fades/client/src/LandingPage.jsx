@@ -21,25 +21,25 @@ function LandingPage() {
     return <p>Loading...</p>;
   }
 
-  return (
-    <>
-      <section className="contact-container">
-        <h2>Contact Us</h2>
-        <section className="locationimg-card">
-          <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
-        </section>
+return (
+  <>
+    <section className="contact-container flex flex-col items-center justify-center pt-8">
+      <h2 className="text-2xl font-bold mb-4 text-white">Greetings Valued Customer #267189!</h2> {/* placeholder for username */}
+      <section className="locationimg-card max-w-md pt-10">
+        <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
       </section>
+    </section>
 
-      {/* Conditional rendering for appointment list */}
-      {(userRole === 'admin') ? (
-        <section>
-          <AppointmentsList />
-        </section>
-      ) : (
-        <p>Welcome To Fitzy's Fades!</p>
-      )}
-    </>
-  );
+    {/* Conditional rendering for appointment list */}
+    {(userRole === 'admin') ? (
+      <section>
+        <AppointmentsList />
+      </section>
+    ) : (
+      <p className="text-center text-white pt-20">You're now logged in!</p>
+    )}
+  </>
+);
 }
 
 export default LandingPage;
