@@ -106,6 +106,7 @@ const SignupForm = () => {
                 </button>
             </form>
             <Link to = "/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
+            <Link to = "/adminsignup" className="text-blue-500 hover:underline">Already have an account?</Link>
         </div>
     );
 };
