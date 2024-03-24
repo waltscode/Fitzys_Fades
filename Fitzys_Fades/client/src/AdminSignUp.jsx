@@ -6,7 +6,7 @@ import { useAuth } from '../src/utils/authContext';
 
 const SignupForm = () => {
     const { login } = useAuth();
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '',role: 'admin', adminKey: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '', role: 'admin', adminKey: '' });
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
 
