@@ -58,7 +58,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    createUser(userInput: UserInput!): Auth
+    createUser(userInput: UserInput!, adminKey: String): Auth
     createMessage (name: String!, email: String!, message: String!): Message
     login(email: String!, password: String!): Auth
     createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: String!): Appointment
