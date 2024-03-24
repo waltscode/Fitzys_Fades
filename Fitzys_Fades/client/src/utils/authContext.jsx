@@ -8,7 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const authService = new AuthService();
-        const [authState, setAuthState] = useState({
+    const [authState, setAuthState] = useState({
         isLoggedIn: false,
         userProfile: null,
     });
@@ -18,19 +18,19 @@ export const AuthProvider = ({ children }) => {
             // Fetch initial authentication state
             const isLoggedIn = authService.loggedIn();
             const userProfile = authService.getProfile();
-            
+
             // update authState
             setAuthState({
                 isLoggedIn,
-                userProfile,
+                userProfile: userProfile.data, // added .data to userProfile so i could acess the nested object, when i create the user object in the backend, i nest the user object in a data object. Probably not the best solution, but it works for now.
             });
         };
-        
+
         initializeAuthState();
     }, []);
 
     const login = async (idToken) => {
-        authService.login(idToken); 
+        authService.login(idToken);
         const isLoggedIn = authService.loggedIn();
         const userProfile = authService.getProfile();
         setAuthState({
