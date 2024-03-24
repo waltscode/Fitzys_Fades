@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useAuth } from '../src/utils/authContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
 import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
+import leftImage from '../dist/images/121.gif'; 
+import rightImage from '../dist/images/121.gif'; 
 
 import "./test-delete-before-pushing.css";
 
@@ -15,7 +17,13 @@ function LandingPage() {
   }, [userProfile, userRole]);
 
   if (!userProfile) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <img src={leftImage} alt="Left Decorative" className="w-20 mr-4" /> 
+        <p>Loading...</p>
+        <img src={rightImage} alt="Right Decorative" className="w-20 ml-4" /> 
+      </div>
+    );
   }
 
   return (
