@@ -30,11 +30,13 @@ function LandingPage() {
         </section>
       </section>
 
-      {/* conditional rendering for appointment list */}
-      {userRole === 'admin' && (
+      {/* Conditional rendering for appointment list */}
+      {(userRole === 'admin') ? (
         <section>
           <AppointmentsList />
         </section>
+      ) : (
+        <p>Welcome To Fitzy's Fades!</p>
       )}
     </>
   );
