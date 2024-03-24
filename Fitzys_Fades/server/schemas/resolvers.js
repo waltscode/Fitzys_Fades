@@ -14,7 +14,13 @@ const resolvers = {
 
     //I think get all appointments will need an added authentication check so only barbers can see all the appointments
     // Get all appointments
-    appointments: async () => {
+    appointments: async (_, args, context) => {
+      if (!context.user || context.user.role !== 'admin') {
+        throw new Error('Not authorized or not an admin.');
+      }
+      // not sure if i need to include arguments in the function to get all appointments
+
+      
       return await Appointment.find({});
     },
     // Get a single appointment by ID
@@ -22,7 +28,7 @@ const resolvers = {
       return await Appointment.findById(id);
     },
     //  Get all messages
-    messages: async (_,__,context) => {
+    messages: async (_, __, context) => {
       //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
       // if (!context.user.isBarber){
       //   throw new AuthenticationError("You don't not have permission to view messages")
@@ -32,7 +38,7 @@ const resolvers = {
     // Get a single message by ID
     message: async (_, { id }, context) => {
       //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
-      if (!context.user.isBarber){
+      if (!context.user.isBarber) {
         throw new AuthenticationError("You don't not have permission to view this message")
       }
       return await Message.findById(id);
@@ -68,9 +74,9 @@ const resolvers = {
       return { token, user };
     },
     // Creates a message and adds to the database
-    createMessage: async (_, {name, email, message}) => {
-      const sentMessage = await Message.create({name, email, message})
-      return {sentMessage}
+    createMessage: async (_, { name, email, message }) => {
+      const sentMessage = await Message.create({ name, email, message })
+      return { sentMessage }
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
@@ -90,7 +96,7 @@ const resolvers = {
       if (!context.user) {
         throw new Error("You need to be logged in to update this profile!"); //have to uncomment this to work
       }
-      const { id, user_name, email, phone, password} = args
+      const { id, user_name, email, phone, password } = args
       const user = await User.findById(id);
       if (!user) {
         throw new Error("User not found");
@@ -98,7 +104,7 @@ const resolvers = {
       if (user.toString() !== context.user._id.toString()) {
         throw new Error("You don't have access to update this profile"); //have to uncomment this to work
       }
-      const updatedArgs = { id, user_name, email, phone, password}
+      const updatedArgs = { id, user_name, email, phone, password }
       user.set(updatedArgs)
       await user.save();
       return user;
@@ -106,7 +112,7 @@ const resolvers = {
 
     createAppointment: async (
       parent,
-{ barber_name, date, time, service },
+      { barber_name, date, time, service },
       context
     ) => {
       const appointment = await Appointment.create({
