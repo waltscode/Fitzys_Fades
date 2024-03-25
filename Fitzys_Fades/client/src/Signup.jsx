@@ -27,7 +27,7 @@ const SignupForm = () => {
         onError: (error) => {
         // console.error('Login error:', error);
         console.log('Signup error:', error);
-        showAlert(true); // do i need this now?
+        setShowAlert(true); // do i need this now?
     }
     });
 
