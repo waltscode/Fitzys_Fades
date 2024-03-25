@@ -10,13 +10,51 @@ function Services() {
   const [dateSelected, setDate] = useState(new Date());
   const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
-  const [dateTimePanel, switchDateTimePanel] = useState("DATE"); 
+  const [dateTimePanel, switchDateTimePanel] = useState("BARBER"); 
   const [serviceSelected, setService] = useState("");
   const navigate = useNavigate();
 
   const [createAppointment] = useMutation(CREATE_APPOINTMENT);
 
   const {isLoggedIn} = useAuth();
+
+  function getDateTimePanel(panel) {
+    if (panel === "BARBER") {
+      return (
+        <div>
+          <h3>Select a Barber</h3>
+        </div>
+      );
+    } else if (panel === "DATE") {
+      return (
+        <div>
+          <Calendar
+            onChange={setDate}
+            value={dateSelected}
+          />
+        </div>
+      );
+    } else if(panel === "TIME") {
+      return (
+        <div>
+          <select
+            value={timeSelected}
+            onChange={(e) => setTime(e.target.value)}
+          >
+            <option value="12:00">12:00 PM</option>
+            <option value="1:00">1:00 PM</option>
+            <option value="2:00">2:00 PM</option>
+            <option value="3:00">3:00 PM</option>
+            <option value="4:00">4:00 PM</option>
+            <option value="5:00">5:00 PM</option>
+            <option value="6:00">6:00 PM</option>
+            <option value="7:00">7:00 PM</option>
+            <option value="8:00">8:00 PM</option>
+          </select>
+        </div>
+      );
+    }
+  }
   
   useEffect(() => {
     console.log("CHANGED DATE: " + dateSelected);
@@ -68,21 +106,7 @@ function Services() {
             <strong>Service:</strong> {serviceSelected}
             <br></br>
             { 
-            dateTimePanel === "DATE" ? 
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Select Date</h2>
-              <Calendar onChange={setDate} value={dateSelected} />
-            </div>
-             : 
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Select Time</h2>
-              <input
-                type="time"
-                className="border border-gray-300 p-2 rounded w-full mb-4"
-                onChange={(event)=>{ setTime(event.target.value) }} 
-              />
-            </div>
-            
+              getDateTimePanel(dateTimePanel)
             }
           </p>
           <div className="flex justify-end">
@@ -124,9 +148,7 @@ function Services() {
         <div className="flex flex-wrap justify-center">
           <div
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"
-            onClick={() => {
-              handleServiceSelection('Traditional')
-            }}
+            
           >
             <div className="relative">
               <div className="relative">
@@ -141,6 +163,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$45</p>
                 </div>
+                <button className="btn btn-large btn-primary text-lg p-4 text-center w-full border-4 mt-2 border-solid border-black" onClick={() => {
+              handleServiceSelection('Traditional')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
