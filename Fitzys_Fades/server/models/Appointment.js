@@ -18,6 +18,10 @@ const appointmentSchema = new Schema({
     type: String,
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User' 
+  }
 });
 
 const Appointment = model("Appointment", appointmentSchema);

@@ -14,6 +14,22 @@ const resolvers = {
       return await User.findById(id).populate("appointments");
     },
 
+        //alternative approach I was considering for get all with an if statement (not args) to check if the user is an admin and if not then get all appointments for the user   -- comment back in for user dashboard operation
+    // appointments: async (_, args, context) => {
+    // // to ensure the user is logged in
+    // if (!context.user) {
+    //   throw new Error('You must be logged in.');
+    // }
+    
+    // //if the user is an admin, return all appointments
+    // if (context.user.role === 'admin') {
+    //   return await Appointment.find({}).populate("user");
+    // }
+
+    // // for non-admin users, return only their relevant appointments
+    // return await Appointment.find({ 'user._id': context.user._id }).populate("user");
+    // },
+
     //I think get all appointments will need an added authentication check so only barbers can see all the appointments
     // Get all appointments
     appointments: async (_, args, context) => {
@@ -23,8 +39,9 @@ const resolvers = {
       // not sure if i need to include arguments in the function to get all appointments
 
       
-      return await Appointment.find({});
+      return await Appointment.find({}).populate("user");
     },
+
     // Get a single appointment by ID
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
