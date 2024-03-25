@@ -26,3 +26,4 @@ export const GET_ALL_APPOINTMENTS = gql`
     }
   }
 `;
+

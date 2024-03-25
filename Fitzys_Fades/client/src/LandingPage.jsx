@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from '../src/utils/authContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
+// import AppointmentsListUser from './Components/AppointmentsListUser';  -- comment back in for user dashboard
 import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
 import leftImage from '../dist/images/121.gif'; 
 import rightImage from '../dist/images/121.gif'; 
@@ -47,6 +48,7 @@ if (!userProfile) {
           <section className="locationimg-card max-w-md pt-10">
             <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
           </section>
+          {/* <AppointmentsListUser /> -- comment back in for user dashboard */}
           {/* placeholder for user stuff, possibly a user dashboard to display appointment */}
         </section>
       )}
