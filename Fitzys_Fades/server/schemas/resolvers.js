@@ -104,7 +104,7 @@ const resolvers = {
     createMessage: async (_, { name, email, message }) => {
 
       const sentMessage = await Message.create({ name, email, message });
-      return { sentMessage };
+      return  sentMessage ;
 
     },
     login: async (_, { email, password }) => {
