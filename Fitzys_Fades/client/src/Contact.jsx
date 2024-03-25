@@ -59,99 +59,103 @@ function Contact() {
   };
 
   return (
-    <section className="contact-container">
-      <h2>Contact Us</h2>
-      <section className="contact-upper">
-        <section className="locationimg-card">
-          <img className="location-image" src={fitzysExterior} alt="" />
-        </section>
-        <section className="contactinfo-card">
-          <ul className="contact-list">
-            <li className="contact-item">
-              <img className="icon" src={locationIcon} alt="Location Icon" />
-              <a
-                className="contact-link"
-                href={
-                  "https://www.google.com/maps/place/182+Ontario+St,+Stratford,+ON+N5A+3H4/@43.3715034,-80.9798419,17.58z/data=!4m6!3m5!1s0x882eadf175fb668b:0x37ead94f0029ff3c!8m2!3d43.3716315!4d-80.9787975!16s%2Fg%2F11c27fj4k2?entry=ttu"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                182 Ontario St., Stratford, ON, Canada, Ontario
-              </a>
-            </li>
-            <li className="contact-item">
-              <img className="icon" src={phoneIcon} alt="Phone Icon" />
-              <p className="contact-info"> (519) 272-1419</p>
-            </li>
-            <li className="contact-item">
-              <img className="icon" src={emailIcon} alt="Instagram Icon" />
-              <p className="contact-info"> Fitzysfadesbarbershop@gmail.com</p>
-            </li>
-            <li className="contact-item">
-              <img className="icon" src={instagramIcon} alt="Email Icon" />
-              <a
-                className="contact-link"
-                href={"https://www.instagram.com/fitzysfadesbarbershop/"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                fitzysfadesbarbershop
-              </a>
-            </li>
-          </ul>
-        </section>
-      </section>
-      <section className="contact-lower">
-        <section>
-          <h2>Send us a message</h2>
-          <h3>
-            If you have a question about your appointment, please provide you
-            appointment detail as well.
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="max-w-2xl w-full p-6 bg-white rounded-lg shadow-lg">
+        {/* Contact Us Card */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+          <div className="flex">
+            {/* Location Image Card */}
+            <div className="flex-1 mr-4">
+              <img className="w-full rounded-lg" src={fitzysExterior} alt="" />
+            </div>
+            {/* Contact Info Card */}
+            <div className="flex-1">
+              <ul className="space-y-4">
+                <li className="flex items-center">
+                  <img className="w-6 h-6 mr-2" src={locationIcon} alt="Location Icon" />
+                  <a
+                    className="text-blue-600 hover:underline"
+                    href="https://www.google.com/maps/place/182+Ontario+St,+Stratford,+ON+N5A+3H4/@43.3715034,-80.9798419,17.58z/data=!4m6!3m5!1s0x882eadf175fb668b:0x37ead94f0029ff3c!8m2!3d43.3716315!4d-80.9787975!16s%2Fg%2F11c27fj4k2?entry=ttu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    182 Ontario St., Stratford, ON, Canada, Ontario
+                  </a>
+                </li>
+                <li className="flex items-center">
+                  <img className="w-6 h-6 mr-2" src={phoneIcon} alt="Phone Icon" />
+                  <p className="text-gray-700">(519) 272-1419</p>
+                </li>
+                <li className="flex items-center">
+                  <img className="w-6 h-6 mr-2" src={emailIcon} alt="Email Icon" />
+                  <p className="text-gray-700">Fitzysfadesbarbershop@gmail.com</p>
+                </li>
+                <li className="flex items-center">
+                  <img className="w-6 h-6 mr-2" src={instagramIcon} alt="Instagram Icon" />
+                  <a
+                    className="text-blue-600 hover:underline"
+                    href="https://www.instagram.com/fitzysfadesbarbershop/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    fitzysfadesbarbershop
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {/* Send Message Card */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Send us a message</h2>
+          <h3 className="text-gray-700 mb-4">
+            If you have a question about your appointment, please provide your appointment detail as well.
           </h3>
-          <form className="contact-form" onSubmit={handleFormSubmit}>
-            <section className="form-container">
-              <section className="contact-information">
-                <input
-                  className="contact-input"
-                  value={name}
-                  name="name"
-                  onChange={handleInputChange}
-                  type="text"
-                  placeholder="Name"
-                />
-                <input
-                  className="contact-input"
-                  value={email}
-                  name="email"
-                  onChange={handleInputChange}
-                  type="text"
-                  placeholder="Email"
-                />
-              </section>
-              <section className="message-container">
-                <textarea
-                  className="message-input"
-                  value={message}
-                  name="message"
-                  onChange={handleInputChange}
-                  type="text"
-                  placeholder="Message"
-                />
-              </section>
-            </section>
+          <form onSubmit={handleFormSubmit}>
+            <div className="mb-4">
+              <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                value={name}
+                name="name"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="Name"
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                value={email}
+                name="email"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="Email"
+              />
+            </div>
+            <div className="mb-4">
+              <textarea
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                value={message}
+                name="message"
+                onChange={handleInputChange}
+                type="text"
+                placeholder="Message"
+              />
+            </div>
             {errorMessage && (
-              <section>
-                <p className="contact-warning">{errorMessage}</p>
-              </section>
+              <p className="text-red-500 mb-4">{errorMessage}</p>
             )}
-            <section className="button-container">
-              <button type="submit">Submit</button>
-            </section>
+            <button
+              className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              type="submit"
+            >
+              Submit
+            </button>
           </form>
-        </section>
-      </section>
-    </section>
+        </div>
+      </div>
+    </div>
   );
 }
 
