@@ -25,9 +25,10 @@ const SignupForm = () => {
             }
         },
         onError: (error) => {
-            console.error('Signup error:', error);
-            setShowAlert(true);
-        }
+        // console.error('Login error:', error);
+        console.log('Signup error:', error);
+        showAlert(true); // do i need this now?
+    }
     });
 
     const handleInputChange = (event) => {
