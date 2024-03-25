@@ -55,6 +55,7 @@ const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
   } catch (err) {
       // console.error('An error occurred:', err);
       console.log('An error occurred:', err);
+      setShowAlert(true); // keep or??
   }
     // if (onClose) onClose();//closes the modal on successful signup
     // console.log(onClose)
