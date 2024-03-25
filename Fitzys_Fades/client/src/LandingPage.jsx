@@ -3,8 +3,8 @@ import { useAuth } from '../src/utils/authContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
 // import AppointmentsListUser from './Components/AppointmentsListUser';  -- comment back in for user dashboard
 import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
-import leftImage from '../dist/images/121.gif';
-import rightImage from '../dist/images/121.gif';
+import leftImage from '/images/121.gif';
+import rightImage from '/images/121.gif';
 
 import "./test-delete-before-pushing.css";
 

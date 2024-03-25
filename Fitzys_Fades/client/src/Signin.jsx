@@ -32,8 +32,9 @@ const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
     }
   },
   onError: (error) => {
-    console.error('Login error:', error);
-    setShowAlert(true);
+      // console.error('Login error:', error);
+      console.log('Login error:', error);
+      showAlert(true); // do i need this now?
   }
 });
 
@@ -51,10 +52,11 @@ const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
           password: userFormData.password,
         }
       })
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
-    }
+  } catch (err) {
+      // console.error('An error occurred:', err);
+      console.log('An error occurred:', err);
+      setShowAlert(true); // keep or??
+  }
     // if (onClose) onClose();//closes the modal on successful signup
     // console.log(onClose)
       navigate('/'); 

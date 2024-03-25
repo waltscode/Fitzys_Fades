@@ -14,7 +14,7 @@ const typeDefs = `
 
   type User {
     _id: ID!
-    user_name: String!
+    user_name: String  # ADD THE "!" BACK IN LATER FOR PRODUCTION. DON'T FORGET!
     email: String!
     phone: String!
     password: String!
