@@ -3,8 +3,8 @@ import { useAuth } from '../src/utils/authContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
 // import AppointmentsListUser from './Components/AppointmentsListUser';  -- comment back in for user dashboard
 import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
-import leftImage from '../dist/images/121.gif'; 
-import rightImage from '../dist/images/121.gif'; 
+import leftImage from '../dist/images/121.gif';
+import rightImage from '../dist/images/121.gif';
 
 import "./test-delete-before-pushing.css";
 
@@ -17,20 +17,20 @@ function LandingPage() {
     console.log('User role:', userRole);
   }, [userProfile, userRole]);
 
-if (!userProfile) {
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <img src={leftImage} alt="Left Decorative" className="w-66 mr-12" /> 
-      
-      <div className="flex flex-col items-center text-white"> 
-        <p className="text-4xl mb-8" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Welcome to Fitzy's</p> 
-        <p className="text-3xl" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Check out our Services!</p> 
-      </div>
+  if (!userProfile) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <img src={leftImage} alt="Left Decorative" className="w-66 mr-12" />
 
-      <img src={rightImage} alt="Right Decorative" className="w-66 ml-12" style={{ transform: 'rotate(180deg)' }} /> 
-    </div>
-  );
-}
+        <div className="flex flex-col items-center text-white">
+          <p className="text-4xl mb-8" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Welcome to Fitzy's</p>
+          <p className="text-3xl" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Check out our Services!</p>
+        </div>
+
+        <img src={rightImage} alt="Right Decorative" className="w-66 ml-12" style={{ transform: 'rotate(180deg)' }} />
+      </div>
+    );
+  }
 
 
   return (
@@ -44,7 +44,7 @@ if (!userProfile) {
       {/* conditional rendering for non-admin greeting and image */}
       {(userRole !== 'admin') && (
         <section className="flex flex-col items-center justify-center">
-          <p className="text-center text-white pt-20"style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Greetings Customer #189123198 -- You're now logged in!</p>
+          <p className="text-center text-white pt-20" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)' }}>Greetings  {userProfile ? userProfile.user_name : 'Customer'} -- You're now logged in!</p>
           <section className="locationimg-card max-w-md pt-10">
             <img className="location-image" src={fitzysExterior} alt="Fitzys Exterior" />
           </section>
