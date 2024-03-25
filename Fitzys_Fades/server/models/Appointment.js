@@ -18,7 +18,7 @@ const appointmentSchema = new Schema({
     type: String,
     required: true,
   },
-  user: {
+  user: { // was missing from the original snippet
     type: Schema.Types.ObjectId,
     ref: 'User' 
   }

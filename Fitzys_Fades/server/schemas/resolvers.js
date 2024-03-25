@@ -39,7 +39,7 @@ const resolvers = {
       // not sure if i need to include arguments in the function to get all appointments
 
       
-      return await Appointment.find({}).populate("user");
+      return await Appointment.find({}).populate("user"); // <--- for returning all appointments
     },
 
     // Get a single appointment by ID
