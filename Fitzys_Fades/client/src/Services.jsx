@@ -20,9 +20,14 @@ function Services() {
 
   function getDateTimePanel(panel) {
     if (panel === "BARBER") {
+      //const barbers = ['JOHN_DOE', 'JANE_DAWN', 'WILLIAM_WILLIAMS'];
+      //const [barberSelected, setBarber] = useState("JOHN_DOE");
       return (
         <div>
           <h3>Select a Barber</h3>
+          <button onClick={()=>{ setBarber("JOHN_DOE") }}>JOHN DOE</button><br/>
+          <button onClick={()=>{ setBarber("JANE_DAWN") }}>JANE DAWN</button><br/>
+          <button onClick={()=>{ setBarber("WILLIAM_WILLIAMS") }}>WILLIAM WILLIAMS</button><br/>
         </div>
       );
     } else if (panel === "DATE") {
@@ -31,7 +36,7 @@ function Services() {
           <Calendar
             onChange={setDate}
             value={dateSelected}
-          />
+            />
         </div>
       );
     } else if(panel === "TIME") {
@@ -40,7 +45,7 @@ function Services() {
           <select
             value={timeSelected}
             onChange={(e) => setTime(e.target.value)}
-          >
+            >
             <option value="12:00">12:00 PM</option>
             <option value="1:00">1:00 PM</option>
             <option value="2:00">2:00 PM</option>
@@ -56,6 +61,92 @@ function Services() {
     }
   }
   
+  function getDateTimeButtons(panel) {
+    if(panel === "BARBER") {
+      return (
+        <div>
+          <button
+            className="px-4 py-2 mr-6  text-white rounded hover:text-blue-400 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              setModalOpened(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              switchDateTimePanel("DATE");
+            }}
+          >
+            Next
+          </button>
+        </div>
+      )
+    } else if(panel === "DATE") {
+      return (
+        <div>
+          <button
+            className="px-4 py-2 mr-6 text-white rounded hover:text-blue-400 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              switchDateTimePanel("BARBER");
+            }}
+          >
+            Back
+          </button>
+          <button
+            className="px-4 py-2 mr-6  text-white rounded hover:text-blue-400 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              setModalOpened(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              switchDateTimePanel("TIME");
+            }}
+          >
+            Next
+          </button>
+        </div> 
+      )
+    } else if(panel === "TIME") {
+      return (
+        <div>
+          <button
+            className="px-4 py-2 mr-6 text-white rounded hover:text-blue-400 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              switchDateTimePanel("DATE");
+            }}
+          >
+            Back
+          </button>
+          <button
+            className="px-4 py-2 mr-6  text-white rounded hover:text-blue-400 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              setModalOpened(false);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            onClick={() => {
+              submitAppointment();
+              switchDateTimePanel("BARBER");
+            }}
+          >
+            Submit
+          </button>
+        </div>
+      )
+    } // else if
+
+  } // get buttons
+
+
   useEffect(() => {
     console.log("CHANGED DATE: " + dateSelected);
   }, [dateSelected]);
@@ -110,33 +201,8 @@ function Services() {
             }
           </p>
           <div className="flex justify-end">
-            <button
-              className="px-4 py-2 mr-6 bg-blue-200 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              onClick={() => {
-                switchDateTimePanel("DATE");
-                setModalOpened(false);
-              }}
-            >
-              Cancel
-            </button>
-            {
-              dateTimePanel === "DATE" ?
-                <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                onClick={() => {
-                  switchDateTimePanel("TIME");
-                }}
-              >
-                Next
-              </button> :
-              <button
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              onClick={() => {
-                submitAppointment();
-              }}
-            >
-              Submit
-            </button>
+            { 
+              getDateTimeButtons(dateTimePanel)
             }
           </div>
         </div>
