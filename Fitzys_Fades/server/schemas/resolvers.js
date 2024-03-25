@@ -1,6 +1,8 @@
 const { User, Appointment, Message } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/Auth");
 
+const ADMIN_KEY = process.env.ADMIN_KEY || '1234567890'; // for demo or dev only
+
 const resolvers = {
   Query: {
     // Get all users with appointments populated
@@ -14,7 +16,13 @@ const resolvers = {
 
     //I think get all appointments will need an added authentication check so only barbers can see all the appointments
     // Get all appointments
-    appointments: async () => {
+    appointments: async (_, args, context) => {
+      if (!context.user || context.user.role !== 'admin') {
+        throw new Error('Not a barber.');
+      }
+      // not sure if i need to include arguments in the function to get all appointments
+
+      
       return await Appointment.find({});
     },
     // Get a single appointment by ID
@@ -33,9 +41,9 @@ const resolvers = {
     message: async (_, { id }, context) => {
       //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
       if (!context.user.isBarber) {
-        throw new AuthenticationError(
-          "You don't not have permission to view this message"
-        );
+
+        throw new AuthenticationError("You don't not have permission to view this message")
+
       }
       return await Message.findById(id);
     },
@@ -62,15 +70,25 @@ const resolvers = {
     // },
   },
   Mutation: {
-    createUser: async (_, { userInput }) => {
+   createUser: async (_, { userInput }) => {
       const user = await User.create(userInput);
       const token = signToken(user);
       return { token, user };
-    },
+  },
+    createAdminUser: async (_, { userInput, adminKey }) => {
+    if (adminKey !== ADMIN_KEY) {
+      throw new Error('Unauthorized: Admin key is invalid.');
+    }
+    const user = await User.create({ ...userInput, role: 'admin' });
+    const token = signToken(user);
+    return { token, user };
+  },
     // Creates a message and adds to the database
     createMessage: async (_, { name, email, message }) => {
+
       const sentMessage = await Message.create({ name, email, message });
       return { sentMessage };
+
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
@@ -81,16 +99,22 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
+      const isAdmin = user.role === 'admin'; 
+      
       const token = signToken(user);
-      return { token, user };
+
+      return { token, user: { ...user.toObject(), isAdmin } };
     },
+
 
     //Update the signed in user's profile information
     updateUser: async (_, args, context) => {
       if (!context.user) {
         throw new Error("You need to be logged in to update this profile!"); //have to uncomment this to work
       }
+
       const { id, user_name, email, phone, password } = args;
+
       const user = await User.findById(id);
       if (!user) {
         throw new Error("User not found");
@@ -98,8 +122,10 @@ const resolvers = {
       if (user.toString() !== context.user._id.toString()) {
         throw new Error("You don't have access to update this profile"); //have to uncomment this to work
       }
+
       const updatedArgs = { id, user_name, email, phone, password };
       user.set(updatedArgs);
+
       await user.save();
       return user;
     },
@@ -109,11 +135,13 @@ const resolvers = {
       { barber_name, date, time, service },
       context
     ) => {
+      const { _id, user_name, email } = context.user;
       const appointment = await Appointment.create({
         barber_name,
         date,
         time,
         service,
+        user: { _id, user_name, email },
       });
       const user = await User.findByIdAndUpdate(
         context.user._id,

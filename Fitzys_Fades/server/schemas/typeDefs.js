@@ -10,6 +10,7 @@ const typeDefs = `
     CUT
     SHAVE
   }
+  
 
   type User {
     _id: ID!
@@ -18,6 +19,7 @@ const typeDefs = `
     phone: String!
     password: String!
     appointments: [Appointment]
+    role: String
   }
 
   type Appointment {
@@ -26,6 +28,7 @@ const typeDefs = `
     date: String!
     time: String!
     service: String!
+    user: User
   }
 
   input UpdateAppointmentInput {
@@ -68,6 +71,7 @@ const typeDefs = `
 
   type Mutation {
     createUser(userInput: UserInput!): Auth
+    createAdminUser(userInput: UserInput!, adminKey: String!): Auth
     createMessage (name: String!, email: String!, message: String!): Message
     login(email: String!, password: String!): Auth
     createAppointment(barber_name: BarberEnum!, date: String!, time: String!, service: String!): Appointment

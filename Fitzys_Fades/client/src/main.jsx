@@ -7,6 +7,7 @@ import Contact from './Contact.jsx'
 import Signup from './Signup.jsx'
 import Signin from './Signin.jsx'
 import LandingPage from './LandingPage.jsx'
+import AdminSignup from './AdminSignUp.jsx'
 
 import './index.css'
 import './styles/Header.css'
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
         path: '/signin',
         element: <Signin />,
       },
+      {
+        path: '/adminsignup',
+        element: <AdminSignup />,
+      },
+      
     ],
   },
 ]);

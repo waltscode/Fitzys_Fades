@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_USER = gql`
-mutation CreateUser($userInput: UserInput!) {
+  mutation CreateUser($userInput: UserInput!) {
     createUser(userInput: $userInput) {
       token
       user {
@@ -9,10 +9,26 @@ mutation CreateUser($userInput: UserInput!) {
         email
         phone
         user_name
+        role
       }
     }
   }
-  `;
+`;
+
+export const CREATE_ADMIN_USER = gql`
+  mutation CreateAdminUser($userInput: UserInput!, $adminKey: String!) {
+    createAdminUser(userInput: $userInput, adminKey: $adminKey) {
+      token
+      user {
+        _id
+        email
+        phone
+        user_name
+        role
+      }
+    }
+  }
+`;
 
 export const CREATE_APPOINTMENT = gql`
   mutation CreateAppointment($barberName: BarberEnum!, $date: String!, $time: String!, $service: String!) {

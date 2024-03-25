@@ -1,24 +1,20 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../src/utils/mutations';
-// import Auth from './utils/auth';
-// import PropTypes from 'prop-types';
+import { CREATE_ADMIN_USER } from '../src/utils/mutations';
 import { useAuth } from '../src/utils/authContext';
-
 
 const SignupForm = () => {
     const { login } = useAuth();
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', phone: '', role: 'admin', adminKey: '' });
     const [showAlert, setShowAlert] = useState(false);
     const navigate = useNavigate();
 
-    const [createUser, { loading, error }] = useMutation(CREATE_USER, {
+    const [createAdminUser, { loading, error }] = useMutation(CREATE_ADMIN_USER, {
         onCompleted: (data) => {
-            const { token } = data.createUser;
+            const { token } = data.createAdminUser;
             if (token) {
                 login(token);
-                // if (onClose) onClose();
                 navigate('/');
             } else {
                 throw new Error('Failed to create user');
@@ -38,14 +34,15 @@ const SignupForm = () => {
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
-        createUser({
+        createAdminUser({
             variables: {
                 userInput: {
                     user_name: userFormData.username,
                     email: userFormData.email,
                     password: userFormData.password,
                     phone: userFormData.phone
-                }
+                },
+                adminKey: userFormData.adminKey // admin key value
             },
         });
     };
@@ -58,8 +55,7 @@ const SignupForm = () => {
                 </div>
             )}
             {loading && <p>Loading...</p>}
-            {error && <p>An err0r occurred: {error.message}</p>}
-            {/* <button onClick={onClose} className="absolute top-0 right-0 p-4">X</button> */}
+            {error && <p>An error occurred: {error.message}</p>}
             <form onSubmit={handleFormSubmit} className="space-y-6">
                 <input
                     className="w-full p-2 border border-gray-300 rounded-md"
@@ -97,24 +93,26 @@ const SignupForm = () => {
                     value={userFormData.phone}
                     required
                 />
+                <input
+                    className="w-full p-2 border border-gray-300 rounded-md"
+                    type="password"
+                    placeholder="Admin Key"
+                    name="adminKey"
+                    onChange={handleInputChange}
+                    value={userFormData.adminKey}
+                    required
+                />
                 <button
                     className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                     type="submit"
-                    disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+                    disabled={!(userFormData.username && userFormData.email && userFormData.password && userFormData.adminKey)}
                 >
                     Sign Up
                 </button>
             </form>
-                <div className="flex justify-between items-center">
-                    <Link to="/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
-                    <Link to="/adminsignup" className="text-blue-500 hover:underline">Work for us?</Link>
-                    </div>
+            <Link to="/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
         </div>
     );
 };
-
-// SignupForm.propTypes = {
-//     onClose: PropTypes.func.isRequired,
-// };
 
 export default SignupForm;

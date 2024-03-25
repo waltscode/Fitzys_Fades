@@ -8,29 +8,51 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const authService = new AuthService();
-    const [isLoggedIn, setIsLoggedIn] = useState(authService.loggedIn());
+    const [authState, setAuthState] = useState({
+        isLoggedIn: false,
+        userProfile: null,
+    });
 
     useEffect(() => {
-        // Check auth state on mount
-        setIsLoggedIn(authService.loggedIn());
+        const initializeAuthState = async () => {
+            // Fetch initial authentication state
+            const isLoggedIn = authService.loggedIn();
+            const userProfile = authService.getProfile();
+
+            // update authState
+            setAuthState({
+                isLoggedIn,
+                 userProfile: userProfile ? userProfile.data : null, // added .data to userProfile so i could acess the nested object, when i create the user object in the backend, i nest the user object in a data object. Probably not the best solution, but it works for now.
+            });
+        };
+
+        initializeAuthState();
     }, []);
 
-    const login = (idToken) => {
+    const login = async (idToken) => {
         authService.login(idToken);
-        setIsLoggedIn(true);
+        const isLoggedIn = authService.loggedIn();
+        const userProfile = authService.getProfile();
+        setAuthState({
+            isLoggedIn,
+            userProfile,
+        });
     };
 
     const logout = () => {
         authService.logout();
-        setIsLoggedIn(false);
+        setAuthState({
+            isLoggedIn: false,
+            userProfile: null,
+        });
     };
 
-    const getProfile = () => {
-        return authService.getProfile();
-    };
+    // const getProfile = () => {
+    //     return authService.getProfile();
+    // };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout, getProfile }}>
+        <AuthContext.Provider value={{ ...authState, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

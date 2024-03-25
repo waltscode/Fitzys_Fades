@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../src/utils/mutations'; 
 // import Auth from './utils/auth';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useAuth } from '../src/utils/authContext';
 //no props on line 9. define onClose and deal with it here.
 //define onclose function itself.
@@ -111,8 +111,8 @@ const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
   );
 };
 
-LoginForm.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+// LoginForm.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+// };
 
 export default LoginForm;
