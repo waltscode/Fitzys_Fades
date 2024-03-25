@@ -41,7 +41,9 @@ const resolvers = {
     message: async (_, { id }, context) => {
       //I think I will need John M's help with implementing barber authentication check here. Currently placeholder)
       if (!context.user.isBarber) {
+
         throw new AuthenticationError("You don't not have permission to view this message")
+
       }
       return await Message.findById(id);
     },
@@ -66,8 +68,6 @@ const resolvers = {
     //     throw new Error("Error while fetching appointments.");
     //   }
     // },
-
-
   },
   Mutation: {
    createUser: async (_, { userInput }) => {
@@ -85,8 +85,10 @@ const resolvers = {
   },
     // Creates a message and adds to the database
     createMessage: async (_, { name, email, message }) => {
-      const sentMessage = await Message.create({ name, email, message })
-      return { sentMessage }
+
+      const sentMessage = await Message.create({ name, email, message });
+      return { sentMessage };
+
     },
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
@@ -110,7 +112,9 @@ const resolvers = {
       if (!context.user) {
         throw new Error("You need to be logged in to update this profile!"); //have to uncomment this to work
       }
-      const { id, user_name, email, phone, password } = args
+
+      const { id, user_name, email, phone, password } = args;
+
       const user = await User.findById(id);
       if (!user) {
         throw new Error("User not found");
@@ -118,8 +122,10 @@ const resolvers = {
       if (user.toString() !== context.user._id.toString()) {
         throw new Error("You don't have access to update this profile"); //have to uncomment this to work
       }
-      const updatedArgs = { id, user_name, email, phone, password }
-      user.set(updatedArgs)
+
+      const updatedArgs = { id, user_name, email, phone, password };
+      user.set(updatedArgs);
+
       await user.save();
       return user;
     },
@@ -144,14 +150,37 @@ const resolvers = {
       );
       return appointment;
     },
-    deleteAppointment: async (parent, { id }, context) => {
-      const appointment = await Appointment.findByIdAndDelete(id);
-      const user = await User.findByIdAndUpdate(
-        context.user._id,
-        { $pull: { appointments: id } },
-        { new: true }
-      );
-      return user;
+    // deleteAppointment: async (parent, { id }, context) => {
+    //   const appointment = await Appointment.findByIdAndDelete(id);
+    //   const user = await User.findByIdAndUpdate(
+    //     context.user._id,
+    //     { $pull: { appointments: id } },
+    //     { new: true }
+    //   );
+    //   return user;
+    // },
+    deleteAppointment: async (_, { id }, context) => {
+      if (!context.user) {
+        throw new Error("You must be logged in to delete an appointment");
+      }
+      try {
+        const appointment = await Appointment.findById(id);
+        if (!appointment) {
+          throw new Error("Appointment not found");
+        }
+        if (appointment.userId !== context.user._id) {
+          throw new Error("You are not authorized to delete this appointment");
+        }
+        await Appointment.findByIdAndDelete(id);
+        const user = await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { appointments: id } },
+          { new: true }
+        );
+        return user;
+      } catch (error) {
+        throw new Error("An error occurred while deleting the appointment");
+      }
     },
 
     //Deletes a message, authentication check is required so that only barbers can delete the message
@@ -168,21 +197,23 @@ const resolvers = {
     },
 
     //update the signed in user's appointment detail
-    updateAppointment: async (_, args, context) => {
+    updateAppointment: async (_, { id, barber_name, date, time, service }, context) => {
       if (!context.user) {
-        throw new Error("You need to be logged in to update this appointment!"); // have to uncomment this to work
+        throw new Error("You need to be logged in to update this appointment!");
       }
-      const { barber_name, date, time, service } = args;
-      const appointment = await Appointment.findById(args.id);
+      const user = await User.findById(context.user._id);
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const appointment = user.appointments.id(id);
       if (!appointment) {
         throw new Error("Appointment not found");
       }
-      if (appointment.user.toString() !== context.user._id.toString()) {
-        throw new Error("You don't have access to update this appointment"); //have to uncomment this to work
-      }
-      const updatedArgs = { barber_name, date, time, service };
-      appointment.set(updatedArgs);
-      await appointment.save();
+      appointment.barber_name = barber_name;
+      appointment.date = date;
+      appointment.time = time;
+      appointment.service = service;
+      await user.save();
       return appointment;
     },
   },
