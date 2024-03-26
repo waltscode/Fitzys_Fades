@@ -1,7 +1,7 @@
 
 import { useQuery } from '@apollo/client';
 import { GET_ALL_APPOINTMENTS } from '../utils/queries';
-import { useAuth } from '../utils/authContext';
+import { useAuth } from '../utils/uthContext';
 
 const AppointmentsListUser = () => {
   const { userProfile } = useAuth();

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../src/utils/mutations';
 // import Auth from './utils/auth';
 // import PropTypes from 'prop-types';
-import { useAuth } from '../src/utils/authContext';
+import { useAuth } from '../src/utils/uthContext';
 
 
 const SignupForm = () => {
