@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../src/utils/mutations'; 
 // import Auth from './utils/auth';
 // import PropTypes from 'prop-types';
-import { useAuth } from '../src/utils/uthContext';
+import { useAuth } from '../src/utils/authContext';
 //no props on line 9. define onClose and deal with it here.
 //define onclose function itself.
 // const ModalComponent = () =>{
