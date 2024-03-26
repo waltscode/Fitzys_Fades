@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect } from 'react';
 import { useAuth } from '../src/utils/authContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
