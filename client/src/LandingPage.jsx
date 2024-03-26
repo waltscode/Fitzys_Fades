@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect } from 'react';
-import { useAuth } from '../src/utils/authContext';
+import { useAuth } from '../src/utils/uthContext';
 import AppointmentsList from '../src/Components/AppointmentsList';
 // import AppointmentsListUser from './Components/AppointmentsListUser';  -- comment back in for user dashboard
 import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";

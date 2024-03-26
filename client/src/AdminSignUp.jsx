@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { CREATE_ADMIN_USER } from '../src/utils/mutations';
-import { useAuth } from '../src/utils/authContext';
+import { useAuth } from '../src/utils/uthContext';
 
 const SignupForm = () => {
     const { login } = useAuth();
