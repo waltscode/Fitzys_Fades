@@ -3,7 +3,7 @@
 // import React from 'react';
 import '../styles/Header.css';
 import headerImage from '/images/textstripe.jpg';
-import { useAuth } from '../utils/LinkuthContext';
+import { useAuth } from '../utils/authContext';
 import {Link} from 'react-router-dom';
 
 function Header() {
