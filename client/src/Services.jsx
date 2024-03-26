@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import {useMutation} from '@apollo/client';
 import { CREATE_APPOINTMENT } from './utils/mutations';
 import { useNavigate } from "react-router-dom";
-import {useAuth} from './utils/uthContext';
+import {useAuth} from './utils/authContext';
 function Services() {
   const barbers = ['JOHN_DOE', 'JANE_DAWN', 'WILLIAM_WILLIAMS'];
   const [barberSelected, setBarber] = useState("JOHN_DOE");
