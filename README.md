@@ -8,7 +8,7 @@
 - [Live Site](#live-site)
 - [Usage](#usage)
 - [Tech Stack](#tech-stack)
-- [GitHub](#github)
+- [Contributors](#contributors)
 - [License](#license)
 
 ## Overview
@@ -29,7 +29,7 @@ View list of appointments made by clients.
 
 ## Live Site
 
-[Check out the website here.](still need the url here.)
+[Check out the website here.](https://fizzyfads.onrender.com/)
 
 ## Usage
 
@@ -62,8 +62,14 @@ Manage Appointments: Access and oversee all client appointments conveniently fro
 ![Static Badge](https://img.shields.io/badge/Tailwind.Css-grey?style=plastic)
 
 
-## GitHub
-[Visit our Repo here.](https://github.com/waltscode/Fitzys_Fades)
+## Contributors
+[John Walters](https://github.com/waltscode)
+
+[John MacNeil](https://github.com/JohnM89)
+
+[Jamie  Guminy](https://github.com/CryptoGymFreak)
+
+[Brian Cheung](https://github.com/CYCBrian)
 
 ## License
 The project is covered under the following license:
