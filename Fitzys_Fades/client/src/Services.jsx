@@ -229,7 +229,7 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$45</p>
                 </div>
-                <button className="btn btn-large btn-primary text-lg p-4 text-center w-full border-4 mt-2 border-solid border-black" onClick={() => {
+                <button className="relative rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
               handleServiceSelection('Traditional')
             }}>Book Now</button>
               </div>
@@ -255,6 +255,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$45</p>
                 </div>
+                <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
+              handleServiceSelection('Traditional')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -275,6 +278,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$30</p>
                 </div>
+                <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
+              handleServiceSelection('Kidz Kutz')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -295,6 +301,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$50</p>
                 </div>
+                <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
+              handleServiceSelection('Traditional')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -315,6 +324,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$60</p>
                 </div>
+                <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
+              handleServiceSelection('Traditional')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -335,6 +347,9 @@ function Services() {
                   </h2>
                   <p className="text-teal-200 mb-2 text-right">$65</p>
                 </div>
+                <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
+              handleServiceSelection('Traditional')
+            }}>Book Now</button>
               </div>
             </div>
           </div>
