@@ -26,7 +26,7 @@ function Header() {
         <nav className="flex items-center">
           <ul className="flex space-x-4 text-white">
             <li><Link className="hover:text-gray-300" to="/">Home</Link></li>
-            <li><Link className="hover:text-gray-300" to="/Linkbout">About us</Link></li>
+            <li><Link className="hover:text-gray-300" to="/about">About us</Link></li>
             <li><Link className="hover:text-gray-300" to="/services">Services</Link></li>
             <li><Link className="hover:text-gray-300" to="/contact">Contact</Link></li>
             {isLoggedIn ? (
