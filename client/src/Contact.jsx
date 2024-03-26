@@ -8,6 +8,7 @@ import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
 import "./test-delete-before-pushing.css";
 import { CREATE_MESSAGE } from "./utils/mutations";
 import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 function Contact() {
   const [name, setName] = useState("");

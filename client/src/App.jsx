@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import backgroundImage from '/images/barber_chair.jpeg'
-import { AuthProvider } from '../src/utils/authContext';
+import { AuthProvider } from '../src/utils/uthContext';
 
 import {
   ApolloClient,
