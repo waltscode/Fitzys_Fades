@@ -39,19 +39,32 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client = {client}>
+    <ApolloProvider client={client}>
       <AuthProvider>
-      <Header />
-      <div className="" style={{ 
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), linear-gradient(rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.1)), url(${backgroundImage})`,
-    backgroundSize: 'cover', 
-    backgroundPosition: 'center', 
-    height: '100vh' 
-
-}}>
+        <Header />
+        <div className="parallax-container">
+          <div
+            className="parallax"
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              position: 'absolute',
+              filter: 'brightness(80%)',
+              top: 100,
+              left: 0,
+              width: '100%',
+              height: '130%',
+              backgroundAttachment: 'fixed',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              zIndex: -1,
+            }}
+          ></div>
+          <div className="content" style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}>
+          </div>
           <Outlet />
-      </div>
-      <Footer/>
+        </div>
+        <Footer />
       </AuthProvider>
     </ApolloProvider>
   );

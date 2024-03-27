@@ -11,6 +11,7 @@ dist
 dist-ssr
 *.local
 
+package-lock.json
 
 .vscode/*
 !.vscode/extensions.json

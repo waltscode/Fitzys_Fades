@@ -8,7 +8,6 @@ import fitzysExterior from "./assets/images/fitzys_fades_exterior.jpg";
 import "./test-delete-before-pushing.css";
 import { CREATE_MESSAGE } from "./utils/mutations";
 import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
 
 function Contact() {
   const [name, setName] = useState("");
@@ -75,14 +74,14 @@ function Contact() {
               <ul className="space-y-4">
                 <li className="flex items-center">
                   <img className="w-6 h-6 mr-2" src={locationIcon} alt="Location Icon" />
-                  <Link
+                  <a
                     className="text-blue-600 hover:underline"
-                    to="https://www.google.com/maps/place/182+Ontario+St,+Stratford,+ON+N5A+3H4/@43.3715034,-80.9798419,17.58z/data=!4m6!3m5!1s0x882eadf175fb668b:0x37ead94f0029ff3c!8m2!3d43.3716315!4d-80.9787975!16s%2Fg%2F11c27fj4k2?entry=ttu"
+                    href="https://www.google.com/maps/place/182+Ontario+St,+Stratford,+ON+N5A+3H4/@43.3715034,-80.9798419,17.58z/data=!4m6!3m5!1s0x882eadf175fb668b:0x37ead94f0029ff3c!8m2!3d43.3716315!4d-80.9787975!16s%2Fg%2F11c27fj4k2?entry=ttu"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     182 Ontario St., Stratford, ON, Canada, Ontario
-                  </Link>
+                  </a>
                 </li>
                 <li className="flex items-center">
                   <img className="w-6 h-6 mr-2" src={phoneIcon} alt="Phone Icon" />
@@ -94,14 +93,14 @@ function Contact() {
                 </li>
                 <li className="flex items-center">
                   <img className="w-6 h-6 mr-2" src={instagramIcon} alt="Instagram Icon" />
-                  <Link
+                  <a
                     className="text-blue-600 hover:underline"
-                    to="https://www.instagram.com/fitzysfadesbarbershop/"
+                    href="https://www.instagram.com/fitzysfadesbarbershop/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     fitzysfadesbarbershop
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>

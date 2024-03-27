@@ -25,10 +25,10 @@ const SignupForm = () => {
             }
         },
         onError: (error) => {
-        // console.error('Login error:', error);
-        console.log('Signup error:', error);
-        setShowAlert(true); // do i need this now?
-    }
+            // console.error('Login error:', error);
+            console.log('Signup error:', error);
+            setShowAlert(true); // do i need this now?
+        }
     });
 
     const handleInputChange = (event) => {
@@ -106,10 +106,10 @@ const SignupForm = () => {
                     Sign Up
                 </button>
             </form>
-                <div className="flex justify-between items-center">
-                    <Link to="/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
-                    <Link to="/adminsignup" className="text-blue-500 hover:underline">Work for us?</Link>
-                    </div>
+            <div className="flex justify-between items-center">
+                <Link to="/signin" className="text-blue-500 hover:underline">Already have an account?</Link>
+                <Link to="/adminsignup" className="text-blue-500 hover:underline">Work for us?</Link>
+            </div>
         </div>
     );
 };

@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import {useMutation} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_APPOINTMENT } from './utils/mutations';
 import { useNavigate } from "react-router-dom";
-import {useAuth} from './utils/authContext';
+import { useAuth } from './utils/authContext';
 function Services() {
-  const barbers = ['JOHN_DOE', 'JANE_DAWN', 'WILLIAM_WILLIAMS'];
+  // const barbers = ['JOHN_DOE', 'JANE_DAWN', 'WILLIAM_WILLIAMS'];
   const [barberSelected, setBarber] = useState("JOHN_DOE");
   const [dateSelected, setDate] = useState(new Date());
   const [timeSelected, setTime] = useState("12:00");
   const [dateModalOpened, setModalOpened] = useState(false);
-  const [dateTimePanel, switchDateTimePanel] = useState("BARBER"); 
+  const [dateTimePanel, switchDateTimePanel] = useState("BARBER");
   const [serviceSelected, setService] = useState("");
   const navigate = useNavigate();
+  
 
   const [createAppointment] = useMutation(CREATE_APPOINTMENT);
 
-  const {isLoggedIn} = useAuth();
+  const { isLoggedIn } = useAuth();
 
   function getDateTimePanel(panel) {
     if (panel === "BARBER") {
@@ -25,9 +26,9 @@ function Services() {
       return (
         <div>
           <h3>Select a Barber</h3>
-          <button onClick={()=>{ setBarber("JOHN_DOE") }}>JOHN DOE</button><br/>
-          <button onClick={()=>{ setBarber("JANE_DAWN") }}>JANE DAWN</button><br/>
-          <button onClick={()=>{ setBarber("WILLIAM_WILLIAMS") }}>WILLIAM WILLIAMS</button><br/>
+          <button onClick={() => { setBarber("JOHN_DOE") }}>JOHN DOE</button><br />
+          <button onClick={() => { setBarber("JANE_DAWN") }}>JANE DAWN</button><br />
+          <button onClick={() => { setBarber("WILLIAM_WILLIAMS") }}>WILLIAM WILLIAMS</button><br />
         </div>
       );
     } else if (panel === "DATE") {
@@ -36,16 +37,16 @@ function Services() {
           <Calendar
             onChange={setDate}
             value={dateSelected}
-            />
+          />
         </div>
       );
-    } else if(panel === "TIME") {
+    } else if (panel === "TIME") {
       return (
         <div>
           <select
             value={timeSelected}
             onChange={(e) => setTime(e.target.value)}
-            >
+          >
             <option value="12:00">12:00 PM</option>
             <option value="1:00">1:00 PM</option>
             <option value="2:00">2:00 PM</option>
@@ -60,9 +61,9 @@ function Services() {
       );
     }
   }
-  
+
   function getDateTimeButtons(panel) {
-    if(panel === "BARBER") {
+    if (panel === "BARBER") {
       return (
         <div>
           <button
@@ -83,7 +84,7 @@ function Services() {
           </button>
         </div>
       )
-    } else if(panel === "DATE") {
+    } else if (panel === "DATE") {
       return (
         <div>
           <button
@@ -110,9 +111,9 @@ function Services() {
           >
             Next
           </button>
-        </div> 
+        </div>
       )
-    } else if(panel === "TIME") {
+    } else if (panel === "TIME") {
       return (
         <div>
           <button
@@ -156,17 +157,17 @@ function Services() {
   }, [serviceSelected]);
 
   useEffect(() => {
- 
+
     console.log("TIME CHANGED: " + timeSelected);
   }, [timeSelected]);
 
-  const handleServiceSelection = (service) => { 
-    if (!isLoggedIn)  {
-    return navigate ('/signin');
-  }
-  setService(service);
-  setModalOpened(true);
-};
+  const handleServiceSelection = (service) => {
+    if (!isLoggedIn) {
+      return navigate('/signin');
+    }
+    setService(service);
+    setModalOpened(true);
+  };
 
 
   function submitAppointment() {
@@ -179,8 +180,8 @@ function Services() {
       time: timeSelected,
       service: serviceSelected
     }
-    createAppointment({variables: appointment});
-  
+    createAppointment({ variables: appointment });
+
     setModalOpened(false);
   }
 
@@ -196,25 +197,29 @@ function Services() {
           <p className="text-gray-700 mb-10">
             <strong>Service:</strong> {serviceSelected}
             <br></br>
-            { 
+            {
               getDateTimePanel(dateTimePanel)
             }
           </p>
           <div className="flex justify-end">
-            { 
+            {
               getDateTimeButtons(dateTimePanel)
             }
           </div>
         </div>
       </div>
 
-      <main>
-        <h2 className="text-center text-4xl font-semibold">Our Services</h2>
-        <h3 className="text-center text-4xl font-semibold">Click on the desired service to set up your appointment</h3>
-        <div className="flex flex-wrap justify-center">
+      <main style={{ marginTop: '40px' }}>
+        <h2 className="text-center text-4xl font-semibold text-white" style={{ textShadow: '3px 2px 4px rgba(0, 0, 0, 0.8)' }}>
+          Our Services
+        </h2>
+        <h3 className="text-center text-2xl font-semibold text-orange-200 mb-4" style={{ textShadow: '3px 2px 4px rgba(0, 0, 0, 0.8)' }}>
+          Click on the desired service to set up your appointment
+        </h3>
+        <div className="flex flex-wrap justify-center" style={{ marginLeft: '100px', marginRight: '100px' }}>
           <div
             className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"
-            
+
           >
             <div className="relative">
               <div className="relative">
@@ -230,8 +235,8 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$45</p>
                 </div>
                 <button className="relative rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Traditional')
-            }}>Book Now</button>
+                  handleServiceSelection('Traditional')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -256,15 +261,15 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$45</p>
                 </div>
                 <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Traditional')
-            }}>Book Now</button>
+                  handleServiceSelection('Traditional')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-             handleServiceSelection("Kidz Kutz");
-            }}>
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14" onClick={() => {
+            handleServiceSelection("Kidz Kutz");
+          }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -279,15 +284,15 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$30</p>
                 </div>
                 <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Kidz Kutz')
-            }}>Book Now</button>
+                  handleServiceSelection('Kidz Kutz')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-             handleServiceSelection("Braid-UP")
-            }}>
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14" onClick={() => {
+            handleServiceSelection("Braid-UP")
+          }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -302,15 +307,15 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$50</p>
                 </div>
                 <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Traditional')
-            }}>Book Now</button>
+                  handleServiceSelection('Traditional')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-              handleServiceSelection("Fitzys Fade")
-            }}>
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14" onClick={() => {
+            handleServiceSelection("Fitzys Fade")
+          }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -325,15 +330,15 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$60</p>
                 </div>
                 <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Traditional')
-            }}>Book Now</button>
+                  handleServiceSelection('Traditional')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14"  onClick={() => {
-             handleServiceSelection("Custom Design")
-            }}>
+          <div className="flex flex-col bg-cyan-600 rounded-lg shadow-md p-2 mr-4 mb-14" onClick={() => {
+            handleServiceSelection("Custom Design")
+          }}>
             <div className="relative">
               <div className="relative">
                 <img
@@ -348,8 +353,8 @@ function Services() {
                   <p className="text-teal-200 mb-2 text-right">$65</p>
                 </div>
                 <button className="rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555] ml-8 mt-3 px-10 py-4 text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50" onClick={() => {
-              handleServiceSelection('Traditional')
-            }}>Book Now</button>
+                  handleServiceSelection('Traditional')
+                }}>Book Now</button>
               </div>
             </div>
           </div>
