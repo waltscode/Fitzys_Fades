@@ -38,10 +38,10 @@ const AppointmentsListUser = () => {
         Your Appointment
       </h2>
       <div className="bg-blue-100 shadow-md rounded p-4 relative mt-1 block w-full p-2 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-        <p className="font-semibold">Barber: {appointment.barber_name}</p>
-        <p>Service: {appointment.service}</p>
-        <p>Date: {appointment.date}</p>
-        <p>Time: {appointment.time}</p>
+        <p className="font-bold ml-12">Barber: {appointment.barber_name}</p>
+        <p className="font-semibold ml-12">Service: {appointment.service}</p>
+        <p className="font-semibold ml-12">Date: {appointment.date}</p>
+        <p className="font-semibold ml-12">Time: {appointment.time}</p>
 
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 scale-50 ml-24 border border-gray-700">
           <stripe-buy-button
