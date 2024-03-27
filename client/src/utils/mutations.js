@@ -60,22 +60,17 @@ export const CREATE_MESSAGE = gql`
 `;
 
 //mutations not yet implemented in FrontEnd but just in case. might not be correct
-
+// just had to reverse order to ali
 export const DELETE_APPOINTMENT = gql`
-  mutation DeleteAppointment($id: ID!) {
-    deleteAppointment(id: $id) {
-      _id
-      username
-      email
-      appointments {
-        _id
-        barber_name
-        date
-        service
-        time
-      }
-    }
+mutation DeleteAppointment($id: ID!) {
+  deleteAppointment(id: $id) {
+    _id
+    barber_name
+    date
+    time
+    service
   }
+}
 `;
 
 export const DELETE_MESSAGE = gql`
