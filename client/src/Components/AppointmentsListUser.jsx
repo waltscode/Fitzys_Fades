@@ -37,13 +37,13 @@ const AppointmentsListUser = () => {
       <h2 className="text-2xl font-bold mb-4 text-center text-white" style={{ textShadow: '4px 4px 4px rgba(0, 0, 0, 0.8)' }}>
         Your Appointment
       </h2>
-      <div className="bg-blue-100 shadow-md rounded p-4 relative mt-1 block w-full p-2 border border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+      <div className="bg-blue-100 shadow-md rounded p-4 relative mt-1 block w-full p-2 border border-black border-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ">
         <p className="font-bold ml-12">Barber: {appointment.barber_name}</p>
         <p className="font-semibold ml-12">Service: {appointment.service}</p>
         <p className="font-semibold ml-12">Date: {appointment.date}</p>
         <p className="font-semibold ml-12">Time: {appointment.time}</p>
 
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 scale-50 ml-24 border border-gray-700">
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 scale-90 mr-16">
           <stripe-buy-button
             buy-button-id="buy_btn_1OyjwXG8J5fghEqMWiSaoNs0"
             publishable-key="pk_live_51OyjnUG8J5fghEqMQqYtLKR4oLliLMZ9kpV9Vdmur7KSwEMHGrhVo7cKyuplqWszwS28mNLqDFGsrxO8V51F4g4M0070Vf3Ta1"
