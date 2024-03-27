@@ -14,8 +14,17 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
+const mongoose = require('mongoose');
+// comment out to run locally 
+// MongoDB connection string with password from environment variable -- comment out to run locally 
+const uri = process.env.MONGODB_URI;
 
-// Create a new instance of an Apollo server with the GraphQL schema
+// Connect to MongoDB Atlas
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('Error connecting to MongoDB Atlas', err));
+
+// Create a new instance of an Apollo server with the GraphQL schema ---- to here (but not this line)
 const startApolloServer = async () => {
   await server.start();
 

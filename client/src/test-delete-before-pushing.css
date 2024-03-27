@@ -14,3 +14,21 @@
     display: flex;
     gap: 1rem;
 }
+/* maybe keep!*/
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #2501013c;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #410505d2;
+  border-radius: 20px;
+
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a0222b;
+}

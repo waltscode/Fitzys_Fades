@@ -42,6 +42,38 @@ const resolvers = {
       return await Appointment.find({}).populate("user"); // <--- for returning all appointments
     },
 
+    
+
+    // get most recent appointment for a user
+  userMostRecentAppointment: async (_, { userId }, context) => {
+    try {
+      if (!context.user || context.user.role === 'admin') {
+        throw new Error('Please log in as admin.');
+      }
+      const user = await User.findById(context.user._id).populate('appointments');
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // sort by date
+      const sortedAppointments = user.appointments.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // find the first appointment with a non-null barber_name, this fixed the damn thing barber kept returning null
+      const mostRecentAppointment = sortedAppointments.find(appointment => appointment.barber_name !== null);
+
+      if (!mostRecentAppointment) {
+        throw new Error("No recent appointment found");
+      }
+
+      return mostRecentAppointment;
+    } catch (error) {
+      throw new Error("Error fetching user's most recent appointment: " + error.message);
+    }
+  },
+
+
+
+
     // Get a single appointment by ID
     appointment: async (_, { id }) => {
       return await Appointment.findById(id);
@@ -177,28 +209,40 @@ const resolvers = {
     //   return user;
     // },
     deleteAppointment: async (_, { id }, context) => {
-      if (!context.user) {
-        throw new Error("You must be logged in to delete an appointment");
-      }
-      try {
-        const appointment = await Appointment.findById(id);
-        if (!appointment) {
-          throw new Error("Appointment not found");
-        }
-        if (appointment.userId !== context.user._id) {
-          throw new Error("You are not authorized to delete this appointment");
-        }
-        await Appointment.findByIdAndDelete(id);
-        const user = await User.findByIdAndUpdate(
-          context.user._id,
-          { $pull: { appointments: id } },
-          { new: true }
-        );
-        return user;
-      } catch (error) {
-        throw new Error("An error occurred while deleting the appointment");
-      }
-    },
+  // Check if the user is logged in
+  if (!context.user) {
+    throw new Error("You must be logged in to delete an appointment");
+  }
+
+  // Check if the user is an admin
+  if (context.user.role !== 'admin') {
+    throw new Error("You are not authorized to delete this appointment");
+  }
+
+  try {
+    // Attempt to find the appointment before deletion to ensure it can be returned after deletion
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      throw new Error("Appointment not found");
+    }
+
+    // Perform the deletion
+    await Appointment.findByIdAndDelete(id);
+
+    // Since the function now should return the deleted Appointment, we return the appointment
+    // that we fetched before deletion.
+    return appointment;
+
+    // Note: Since only admins can delete appointments, and we're returning the deleted appointment,
+    // there's no need to update the User document to pull the deleted appointment reference.
+    // This logic can be omitted or adjusted based on specific requirements of how you're tracking appointments.
+  } catch (error) {
+    // Log the error or handle it as needed
+    console.error("Error deleting appointment:", error);
+    throw new Error("An error occurred while deleting the appointment");
+  }
+},
+
 
     //Deletes a message, authentication check is required so that only barbers can delete the message
     deleteMessage: async (parent, { id }, context) => {
